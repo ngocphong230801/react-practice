@@ -8,6 +8,7 @@ type CustomBtnProps = {
     variant?: Variant;
     disabled?: boolean;
     loading?: boolean;
+    buttonType?: "button" | "submit" | "reset";
     onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
@@ -18,8 +19,9 @@ const Button: React.FC<CustomBtnProps> = ({
     variant = Variant.DEFAULT,
     children,
     loading,
+    buttonType = "button",
 }) => (
-    <button className={`${className} btn btn-${variant}`} onClick={onClick} disabled={disabled || loading}>
+    <button type={buttonType} className={`${className} btn btn-${variant}`} onClick={onClick} disabled={disabled || loading}>
         {loading ? "Loading..." : children}
     </button>
 );
