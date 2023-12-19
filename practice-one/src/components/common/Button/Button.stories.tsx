@@ -13,5 +13,8 @@ export const Default: Story = {
     args: {
         variant: Variant.DEFAULT,
         children: "Add Student",
-      },
+        loading: false,
+        disabled: false,
+        buttonType: "button",
+    },
 };
