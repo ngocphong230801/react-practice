@@ -11,7 +11,7 @@ type CustomBtnProps = {
     disabled?: boolean;
     loading?: boolean;
     buttonType?: "button" | "submit" | "reset";
-    onClick: MouseEventHandler<HTMLButtonElement>;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
 const Button: React.FC<CustomBtnProps> = ({

@@ -1,9 +1,10 @@
 import './App.css'
+import SideBar from './layouts/SideBar'
 
 function App() {
   return (
     <div>
-      <h1>Hello</h1>
+      <SideBar />
     </div>
   )
 }
