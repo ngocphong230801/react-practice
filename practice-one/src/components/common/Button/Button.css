@@ -1,0 +1,33 @@
+@import url(../../../App.css);
+
+.btn {
+    font-size: var(--font-size-text-base);
+    border: 0;
+    border-radius: 4px;
+    padding: 12px 14px;
+    cursor: pointer;
+    display: flex;
+    width: 131px;
+    padding: 12px 14px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-default {
+    color: var(--color-text-default);
+    background-color: var(--background-primary);
+}
+
+.btn-primary {
+    color: var(--color-text-quaternary);
+    background-color: var(--background-quaternary);
+}
+
+.btn-secondary {
+    color: var(--color-text-secondary);
+    background-color: var(--background-tertiary);
+    border-radius: 30px;
+    width: 180px;
+    height: 60px;
+}
