@@ -1,0 +1,80 @@
+.add-student-form {
+    position: fixed;
+    top: 61px;
+    left: 323px;
+    width: 969px;
+    height: 691px;
+    background-color: var(--background-default);
+    display: flex;
+    flex-direction: column;
+    gap: 54px;
+}
+
+.add-student-form .form-header {
+    margin-top: 102px;
+    margin-left: 83px;
+}
+
+.add-student-form .heading-form {
+    color: var(--color-text-quaternary);
+    font-size: var(--font-size-text-2xl);
+    font-weight: var(--font-weight-semibold);
+}
+
+.add-student-form .link-group {
+    margin-top: 30px;
+    display: flex;
+    gap: 73px;
+}
+
+.add-student-form .link-group-item {
+    color: var(--color-text-quaternary);
+    font-size: var(--font-size-text-lg);
+    font-weight: var(--font-weight-light);
+}
+
+.add-student-form .form-body {
+    display: flex;
+    flex-direction: column;
+    gap: 33px;
+}
+
+.add-student-form .form-body-item {
+    display: flex;
+    gap: 47px;
+    margin-left: 81px;
+}
+
+.add-student-form .item {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-student-form .item-title {
+    margin-bottom: 5px;
+    color: var(--color-text-octonary);
+    font-size: var(--font-size-text-base);
+}
+
+.add-student-form .studen-passworld {
+    margin-left: 81px;
+}
+
+.add-student-form .select-item {
+    margin-top: 20px;
+    width: 179px;
+    height: 42px;
+    color: var(--color-text-septenary);
+    border: 0.5px solid var(--color-text-septenary);
+}
+
+.add-student-form .btn-primary {
+    margin-top: 54px;
+    margin-left: 81px;
+}
+
+
+.add-student-form .error-message {
+    color: red;
+    margin-top: 3px;
+}
