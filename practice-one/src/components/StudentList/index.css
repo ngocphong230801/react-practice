@@ -1,0 +1,30 @@
+.list-student {
+    margin-left: 279px;
+    margin-top: 23px;
+}
+
+.list-student .list-header {
+    display: flex;
+}
+
+.list-student .list-header-item {
+    color: var(--color-text-primary);
+    font-size: var(--font-size-text-sm);
+    font-weight: var(--font-weight-bold);
+}
+
+.list-student .id {
+    margin-left: 150px;
+}
+
+.list-student .email {
+    margin-left: 50px;
+}
+
+.list-student .class {
+    margin-left: 200px;
+}
+
+.list-student .gender {
+    margin-left: 50px;
+}
