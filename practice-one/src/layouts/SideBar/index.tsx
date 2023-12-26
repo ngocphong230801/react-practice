@@ -1,8 +1,9 @@
 import { Logo, Dashboard, Student, Setting, Exams, Billing, Feature } from "../../assets/icon"
 import "./SideBar.css"
 import "../../assets/icon/index"
+import { ReactElement } from "react";
 
-const SideBar  = () => {
+const SideBar: React.FC = (): React.ReactElement => {
     const handleItemClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
         const sidebarItems = document.querySelectorAll('.sidebar-item');
         sidebarItems.forEach(item => {
