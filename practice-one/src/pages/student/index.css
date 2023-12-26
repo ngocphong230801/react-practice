@@ -1,0 +1,19 @@
+.student-page .btn-default {
+    position: absolute;
+    left: 450px;
+    top: 39px;
+    z-index: 1000;
+}
+
+.student-page .search-box {
+    margin-top: 23px;
+    display: flex;
+}
+
+.student-page .filter {
+    margin-left: 279px;
+    width: 132px;
+    align-items: center;
+    color: var(--color-text-septenary);
+    border: none;
+}

@@ -12,7 +12,7 @@
 
 .header .icon-notify {
     position: absolute;
-    right: 345px;
+    right: 220px;
     top: 40px;
     cursor: pointer;
 }
@@ -47,7 +47,7 @@
 
 .header .log-out {
     position: absolute;
-    right: 227px;
+    right: 120px;
     top: 40px;
     cursor: pointer;
     font-weight: var(--font-weight-semibold);

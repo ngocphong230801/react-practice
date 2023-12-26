@@ -122,6 +122,10 @@ q {
   quotes: none;
 }
 
+body {
+  font-family: var(--font-primary);
+}
+
 blockquote:before,
 blockquote:after,
 q:before,

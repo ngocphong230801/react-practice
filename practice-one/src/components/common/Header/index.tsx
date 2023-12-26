@@ -3,12 +3,12 @@ import React, { ReactNode} from "react";
 import { THeader } from "../../../types";
 
 type CustomHeaderProps = {
-    className: THeader;
+    className?: THeader;
     title?: string;
     content?: string;
     children?: ReactNode;
     icon?: ReactNode;
-    logOut: string;
+    logOut?: string;
 };
 
 const Header: React.FC<CustomHeaderProps> = ({

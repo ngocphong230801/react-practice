@@ -1,11 +1,23 @@
 import './App.css'
-import SideBar from './layouts/SideBar'
+import DashboadPage from './pages/dashboad'
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import { routers } from "./routers";
+import StudentPage from './pages/student';
 
 function App() {
   return (
-    <div>
-      <SideBar />
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element = {<DashboadPage />} />
+      <Route element = {<StudentPage />}>
+        {routers.map((item) => (
+          <Route key={item.path} path= {item.path} element={item.element} />
+        ))}
+      </Route>
+    </Routes>
+    </BrowserRouter>
   )
 }
 
