@@ -5,11 +5,13 @@ import Input from "../common/Input";
 import { isValidEmail, isValidName, isValidPhone, isValidPassworld } from "../../helpers/validation";
 import { ERROR_MESSAGES } from "../../constants/error";
 
+
 interface AddStudentFormProps {
     closeForm: () => void;
+    onStudentAdd: () => void;
 }
 
-const AddStudentForm: React.FC<AddStudentFormProps> = ({ closeForm }) => {
+const AddStudentForm: React.FC<AddStudentFormProps> = ({ closeForm, onStudentAdd }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
@@ -99,6 +101,7 @@ const AddStudentForm: React.FC<AddStudentFormProps> = ({ closeForm }) => {
         students.push(newStudent);
 
         localStorage.setItem('students', JSON.stringify(students));
+        onStudentAdd();
     
         setName("");
         setEmail("");

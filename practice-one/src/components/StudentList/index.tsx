@@ -1,14 +1,12 @@
-import "./index.css"
-import { useState, useEffect } from 'react';
+import React from 'react';
 import { StudentProfile } from "../../types";
+import "./index.css"
 
-const ListStudent = () => {
-    const [students, setStudents] = useState<StudentProfile[]>([]);
+interface ListStudentProps {
+    students: StudentProfile[];
+}
 
-    useEffect(() => {
-        const storedStudents = JSON.parse(localStorage.getItem('students') || '[]');
-        setStudents(storedStudents);
-    }, []);
+const ListStudent: React.FC<ListStudentProps> = ({ students }) => {
 
     return (
         <div className="list-student">
@@ -20,18 +18,18 @@ const ListStudent = () => {
                 <li className="list-header-item gender">Gender</li>
             </ul>
             <ul className="list-body">
-                {students.map((students, index) => (
+                {students.map((student, index) => (
                     <li key={index} className={`student-row ${index % 2 !== 0 ? 'odd-row' : ''}`}>
-                        <span className="student-name">{students.name}</span>
-                        <span className="student-id">{students.studentID}</span>
-                        <span className="student-email">{students.email}</span>
-                        <span className="student-class">{students.classes}</span>
-                        <span className="student-gender">{students.gender}</span>
+                        <span className="student-name">{student.name}</span>
+                        <span className="student-id">{student.studentID}</span>
+                        <span className="student-email">{student.email}</span>
+                        <span className="student-class">{student.classes}</span>
+                        <span className="student-gender">{student.gender}</span>
                     </li>
                 ))}
             </ul>
         </div>
-    )
+    );
 }
 
-export default ListStudent
+export default ListStudent;

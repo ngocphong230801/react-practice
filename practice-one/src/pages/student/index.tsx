@@ -6,10 +6,22 @@ import "./index.css"
 import ListStudent from "../../components/StudentList";
 import Input from "../../components/common/Input";
 import AddStudentForm from "../../components/Form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { StudentProfile } from "../../types";
 
-const StudentPage: React.FC = (): React.ReactElement =>{
+const StudentPage: React.FC = (): React.ReactElement => {
     const [showAddStudentForm, setShowAddStudentForm] = useState(false);
+    const [students, setStudents] = useState<StudentProfile[]>([]);
+
+    useEffect(() => {
+        fetchStudents();
+    }, []);
+
+    const fetchStudents = () => {
+        const storedStudents = JSON.parse(localStorage.getItem('students') || '[]');
+        setStudents(storedStudents);
+    };
+
 
     const handleAddStudentClick = () => {
         setShowAddStudentForm(!showAddStudentForm);
@@ -17,6 +29,12 @@ const StudentPage: React.FC = (): React.ReactElement =>{
 
     const handleCloseForm = () => {
         setShowAddStudentForm(false);
+    };
+
+
+    const handleStudentAdded = () => {
+        fetchStudents();
+        handleCloseForm();
     };
 
     return (
@@ -41,10 +59,10 @@ const StudentPage: React.FC = (): React.ReactElement =>{
                 />
             </div>
             {showAddStudentForm && <div className="overlay" onClick={handleCloseForm}></div>}
-            {showAddStudentForm && <AddStudentForm closeForm={handleCloseForm} />}
-            <ListStudent />
+            {showAddStudentForm && <AddStudentForm closeForm={handleCloseForm} onStudentAdd={handleStudentAdded} />}
+            <ListStudent students={students} />
         </div>
-    )
+    );
 }
 
 export default StudentPage

@@ -10,7 +10,7 @@ function App() {
   return (
     <BrowserRouter>
     <Routes>
-      <Route path="/" element = {<DashboadPage />} />
+      <Route path="/home" element = {<DashboadPage />} />
       <Route element = {<StudentPage />}>
         {routers.map((item) => (
           <Route key={item.path} path= {item.path} element={item.element} />
