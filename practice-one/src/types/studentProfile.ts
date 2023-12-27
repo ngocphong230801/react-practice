@@ -2,7 +2,7 @@ export interface StudentProfile {
     name: string;
     studentID: number;
     email: string;
-    class: string;
+    classes: string;
     gender: boolean;
     phone: number;
     password: string;

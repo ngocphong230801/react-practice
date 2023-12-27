@@ -5,16 +5,29 @@ import Button from "../../components/common/Button";
 import "./index.css"
 import ListStudent from "../../components/StudentList";
 import Input from "../../components/common/Input";
+import AddStudentForm from "../../components/Form";
+import { useState } from "react";
 
 const StudentPage: React.FC = (): React.ReactElement =>{
+    const [showAddStudentForm, setShowAddStudentForm] = useState(false);
+
+    const handleAddStudentClick = () => {
+        setShowAddStudentForm(!showAddStudentForm);
+    };
+
+    const handleCloseForm = () => {
+        setShowAddStudentForm(false);
+    };
 
     return (
         <div className="student-page">
             <Header logOut="Logout" icon={<Notify />} />
             <SideBar />
+            <a href="#" className="export-csv">Export CSV</a>
             <Button
                 title="Add student"
-                className="btn-default"
+                className="btn-default btn-add-student"
+                onClick={handleAddStudentClick}
             />
             <div className="search-box">
                 <select className="filter">
@@ -27,6 +40,8 @@ const StudentPage: React.FC = (): React.ReactElement =>{
                     placeholder="Search for a student by name or email"
                 />
             </div>
+            {showAddStudentForm && <div className="overlay" onClick={handleCloseForm}></div>}
+            {showAddStudentForm && <AddStudentForm closeForm={handleCloseForm} />}
             <ListStudent />
         </div>
     )

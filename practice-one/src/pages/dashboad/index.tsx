@@ -43,7 +43,7 @@ const DashboadPage: React.FC = (): React.ReactElement => {
                     </div>
                     <div className="funtion-item">
                         <div className="funtion-item-header">
-                            <img src={AddStudent} alt="AddClass" />
+                            <img src={AddStudent} alt="AddClass" className="student-icon" />
                             <p className="funtion-item-title">Add Student</p>
                         </div>
                         <p className="funtion-item-content">Create rich course content and coaching products for your students.

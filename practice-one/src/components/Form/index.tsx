@@ -2,11 +2,14 @@ import React, { useState } from "react"
 import "./Form.css"
 import Button from "../common/Button";
 import Input from "../common/Input";
-
 import { isValidEmail, isValidName, isValidPhone, isValidPassworld } from "../../helpers/validation";
 import { ERROR_MESSAGES } from "../../constants/error";
 
-const AddStudentForm = () => {
+interface AddStudentFormProps {
+    closeForm: () => void;
+}
+
+const AddStudentForm: React.FC<AddStudentFormProps> = ({ closeForm }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
@@ -79,9 +82,17 @@ const AddStudentForm = () => {
        
         if (isAnyFieldEmpty || nameError || emailError || phoneError || passwordError) {
             return;
+        } else {
+            closeForm();
         }
+
+        const generateStudentID = () => {
+            return Math.floor(10000 + Math.random() * 90000);
+        };
+
+        const studentID = generateStudentID();
     
-        const newStudent = { name, email, phone, gender, password, classes };
+        const newStudent = { studentID, name, email, phone, gender, password, classes };
     
         const students = JSON.parse(localStorage.getItem('students') || '[]');
     
@@ -186,7 +197,7 @@ const AddStudentForm = () => {
                     {passwordError && <span className="error-message">{passwordError}</span>}
                 </div>
                 <Button
-                    className="btn-primary"
+                    className="btn-primary btn-submit"
                     title="Add student"
                     buttonType="submit"
                 />
