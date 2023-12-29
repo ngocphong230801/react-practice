@@ -8,6 +8,7 @@ import Input from "../../components/common/Input";
 import AddStudentForm from "../../components/Form";
 import { useState, useEffect } from "react";
 import { StudentProfile } from "../../types";
+import InformationStudent from "../../components/Infomation";
 
 const StudentPage: React.FC = (): React.ReactElement => {
     const [showAddStudentForm, setShowAddStudentForm] = useState(false);
@@ -61,6 +62,7 @@ const StudentPage: React.FC = (): React.ReactElement => {
             {showAddStudentForm && <div className="overlay" onClick={handleCloseForm}></div>}
             {showAddStudentForm && <AddStudentForm closeForm={handleCloseForm} onStudentAdd={handleStudentAdded} />}
             <ListStudent students={students} />
+            <InformationStudent students={students} />
         </div>
     );
 }

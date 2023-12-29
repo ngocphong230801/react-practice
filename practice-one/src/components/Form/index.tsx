@@ -93,8 +93,9 @@ const AddStudentForm: React.FC<AddStudentFormProps> = ({ closeForm, onStudentAdd
         };
 
         const studentID = generateStudentID();
+        const studentAge = "17";
     
-        const newStudent = { studentID, name, email, phone, gender, password, classes };
+        const newStudent = { studentID, name, email, phone, gender, password, classes, studentAge};
     
         const students = JSON.parse(localStorage.getItem('students') || '[]');
     

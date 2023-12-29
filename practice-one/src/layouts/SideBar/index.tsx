@@ -1,12 +1,8 @@
-import {
-  Logo,
-  Feature,
-} from "../../assets/icon";
+import { Logo, Feature, Active, } from "../../assets/icon";
 import "./SideBar.css";
 import "../../assets/icon/index";
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import SIDEBAR_ITEM from "../../constants/sidebar";
-
 
 const SideBar: React.FC = (): React.ReactElement => {
 
@@ -16,9 +12,12 @@ const SideBar: React.FC = (): React.ReactElement => {
     if (url) {
       return (
         <li key={index} className="sidebar-item">
-          <NavLink to={url} className={({ isActive }) => isActive ? "actives" : "link"}>
-            <img src={icon} alt={label} />
-            <span className="sidebar-item-content ">{label}</span>
+          <NavLink to={url} className={({ isActive }) => isActive ? "actives" : ""}>
+            <div className="sidebar-item">
+              <img src={icon} alt={label} className="icon" />
+              <span className="sidebar-item-content ">{label}</span>
+              {/* <img src= {Active} alt="active" className="active-icon" /> */}
+            </div>
           </NavLink>
         </li>
       );
@@ -26,7 +25,7 @@ const SideBar: React.FC = (): React.ReactElement => {
       return (
         <li key={index} className="sidebar-item">
           <div className="sidebar-item">
-            <img src={icon} alt={label} />
+            <img src={icon} alt={label} className="icon" />
             <span className="sidebar-item-content ">{label}</span>
           </div>
         </li>

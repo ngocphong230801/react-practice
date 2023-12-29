@@ -36,18 +36,26 @@
   margin: 16px 28px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 10px;
 }
 
 .sidebar-item {
   display: flex;
-  gap: 25px;
   cursor: pointer;
+  align-items: center;
+  height: 40px;
+  gap: 15px;
+  width: 192px;
+}
+
+.sidebar .icon {
+  margin-left: 10px;
 }
 
 .sidebar-menu .actives {
   border: var(--background-primary);
   background-color: var(--background-primary);
+  border-radius: 4px;
 }
 
 .sidebar-item-content {
@@ -58,9 +66,9 @@
 
 .sidebar-feature {
   margin-top: 114px;
-  margin-left: 28px;
+  margin-left: 38px;
   display: flex;
-  gap: 25px;
+  gap: 15px;
   align-items: center;
 }
 
@@ -72,4 +80,5 @@
   color: var(--color-text-senary);
   font-size: var(--font-size-text-sm);
   font-weight: var(--font-weight-semibold);
+  margin-left: 10px;
 }

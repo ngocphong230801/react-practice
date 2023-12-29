@@ -1,0 +1,71 @@
+.information-student {
+    position: fixed;
+    top: 105px;
+    left: 1075px;
+    bottom: 20px;
+    z-index: 1000;
+    width: 313px;
+}
+
+.information-student .info-student {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-student .student-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 180px;
+    margin-top: 12px;
+    margin-left: 67px;
+}
+
+
+.info-student .student-id {
+    margin-top: 74px;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-text-md);
+    font-weight: var(--font-weight-light);
+    margin-left: 129px;
+}
+
+.name-item {
+    margin-top: 20px;
+}
+
+.info-student .student-name {
+    color: var(--color-text-senary);
+    font-size: var(--font-size-text-md);
+    font-weight: var(--font-weight-bold);
+    margin-left: 80px;    
+}
+
+.info-student .science-student {
+    color: var(--color-text-septenary);
+    font-size: var(--font-size-text-base);
+    font-weight: var(--font-weight-light);
+    margin-left: 103px;
+    margin-top: 10px;
+}
+
+.icon-item {
+    display: flex;
+    gap: 15px;
+    margin-top: 32px;
+    margin-left: 88px;
+}
+
+.info-student .icon {
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+    background-color: var(--background-quaternary);
+    border-radius: 8px;
+}
+
+.information-student .group-item {
+    display: flex;
+    color: var(--color-text-senary);
+    font-size: var(--font-size-text-sm);
+    font-weight: var(--font-weight-bold);
+}
