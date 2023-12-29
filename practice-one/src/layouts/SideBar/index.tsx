@@ -1,27 +1,38 @@
 import {
   Logo,
-  Dashboard,
-  Student,
   Feature,
 } from "../../assets/icon";
 import "./SideBar.css";
 import "../../assets/icon/index";
-import { NavLink } from "react-router-dom";
+import { NavLink} from "react-router-dom";
+import SIDEBAR_ITEM from "../../constants/sidebar";
 
 
 const SideBar: React.FC = (): React.ReactElement => {
 
-  const listItem = [
-    {label: 'home', icon: Dashboard, url:'/home'},
-    {label: 'student', icon: Student, url:'/student'},
-    {label: 'teacher', icon: Student}
-]
+  const renderList = SIDEBAR_ITEM.map((item, index) => {
+    const { label, icon, url } = item;
 
-  const renderList = listItem.map((item) => {
-    const {label, icon, url} = item || {}
-    return <NavLink to= {url} className={({ isActive }) => [isActive ? "actives" : ""].join(" ")}>
-    <img src={icon} alt={icon} />{label}</NavLink>
-})
+    if (url) {
+      return (
+        <li key={index} className="sidebar-item">
+          <NavLink to={url} className={({ isActive }) => isActive ? "actives" : "link"}>
+            <img src={icon} alt={label} />
+            <span className="sidebar-item-content ">{label}</span>
+          </NavLink>
+        </li>
+      );
+    } else {
+      return (
+        <li key={index} className="sidebar-item">
+          <div className="sidebar-item">
+            <img src={icon} alt={label} />
+            <span className="sidebar-item-content ">{label}</span>
+          </div>
+        </li>
+      );
+    }
+  });
 
   return (
     <div className="sidebar">
@@ -32,9 +43,7 @@ const SideBar: React.FC = (): React.ReactElement => {
         <h1 className="sidebar-heading">Udemy Inter. School</h1>
       </div>
       <ul className="sidebar-menu">
-        <li>
         {renderList}
-        </li>
       </ul>
       <a href="#" className="sidebar-feature">
         <img src={Feature} alt="Feature" />

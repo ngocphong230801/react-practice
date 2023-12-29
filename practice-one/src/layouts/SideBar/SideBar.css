@@ -36,19 +36,17 @@
   margin: 16px 28px;
   display: flex;
   flex-direction: column;
+  gap: 25px;
 }
 
 .sidebar-item {
-  align-items: center;
   display: flex;
-  padding: 10px;
   gap: 25px;
   cursor: pointer;
-  margin-top: 10px;
 }
 
 .sidebar-menu .actives {
-  border-left: var(--background-primary);
+  border: var(--background-primary);
   background-color: var(--background-primary);
 }
 
