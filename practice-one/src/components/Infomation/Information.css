@@ -31,20 +31,21 @@
 
 .name-item {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .info-student .student-name {
     color: var(--color-text-senary);
     font-size: var(--font-size-text-md);
     font-weight: var(--font-weight-bold);
-    margin-left: 80px;    
 }
 
 .info-student .science-student {
     color: var(--color-text-septenary);
     font-size: var(--font-size-text-base);
     font-weight: var(--font-weight-light);
-    margin-left: 103px;
     margin-top: 10px;
 }
 
