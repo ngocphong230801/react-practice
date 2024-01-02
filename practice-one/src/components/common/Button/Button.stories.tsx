@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Button from ".";
+import Button from "./index";
 import { Variant } from "../../../types/variant";
 import SupportIcon from "../../Icon/IconSupport";
 import CheckDownIcon from "../../Icon/IconCheckDown";
