@@ -1,54 +1,68 @@
+import React from 'react';
+import { StudentProfile } from "../../types";
+import { Email, Phone, Teacher } from "../../assets/icon";
 import "./Information.css"
 
-import { StudentProfile } from "../../types";
-import { Email, Logo, Phone, Teacher } from "../../assets/icon";
-
-interface InformationStudentProrp {
+interface InformationStudentProps {
+    student: StudentProfile;
     students: StudentProfile[];
 }
 
+const InformationStudent: React.FC<InformationStudentProps> = ({ student, students }) => {
+    const classmates = students.filter(s => s.studentID !== student.studentID);
+    const displayCount = 5;
 
-const InformationStudent: React.FC<InformationStudentProrp> = ({ students }) => {
     return (
         <div className="information-student">
-            {students.map((student, index) => (
-                <li key={index} className="info-student" >
-                    <span className="student-id">{student.studentID}</span>
-                    <img src={Logo} alt="student-img" className="student-image" />
-                    <div className="name-item">
-                        <span className="student-name">{student.name}</span>
-                        <p className="science-student">Science student</p>
+            <div className="info-student">
+                <span className="student-id">{student.studentID}</span>
+                <img src={student.imageUrl} alt="student-img" className="student-image" />
+                <div className="name-item">
+                    <span className="student-name">{student.name}</span>
+                    <p className="science-student">Science student</p>
+                </div>
+                <div className="icon-item">
+                    <img src={Teacher} alt="icon" className="icon" />
+                    <img src={Phone} alt="icon" className="icon" />
+                    <img src={Email} alt="icon" className="icon" />
+                </div>
+                <div className="group-item">
+                    <div className="age-item item">
+                        <p className="label">Age</p>
+                        <span className="student-age contact">{student.studentAge}</span>
                     </div>
-                    <div className="icon-item">
-                        <img src={Teacher} alt="icon" className="icon" />
-                        <img src={Phone} alt="icon" className="icon"/>
-                        <img src={Email} alt="icon" className="icon" />
+                    <div className="gender-item item">
+                        <p className="label">Gender</p>
+                        <span className="student-gender contact">{student.gender}</span>
                     </div>
-                    <div className="group-item">
-                        <div className="age-item">
-                            <p className="label">Age</p>
-                            <span className="student-age">{student.studentAge}</span>
-                        </div>
-                        <div className="gender-item">
-                            <p className="label">Gender</p>
-                            <span className="student-gender">{student.gender}</span>
-                        </div>
+                </div>
+                <div className="phone-item item">
+                    <p className="label">Phone number</p>
+                    <span className="student-phone contact">{student.phone}</span>
+                </div>
+                <div className="item">
+                    <p className="label">Email</p>
+                    <span className="student-email contact">{student.email}</span>
+                </div>
+                <div className="item">
+                    <p className="label">People from the same class</p>
+                    <div className="classmates-images">
+                        {classmates.slice(0, displayCount).map(classmate => (
+                            <img
+                                key={classmate.studentID}
+                                src={classmate.imageUrl}
+                                alt={classmate.name}
+                                className="classmate-image"
+                            />
+                        ))}
+                        {classmates.length > displayCount && (
+                            <span className="more-classmates">+{classmates.length - displayCount} more</span>
+                        )}
                     </div>
-                    <div className="phone-item">
-                        <p className="label">Phone number</p>
-                        <span className="student-phone">{student.phone}</span>
-                    </div>
-                    <div>
-                        <p className="label">Email</p>
-                        <span className="student-email">{student.email}</span>
-                    </div>
-                    <div>
-                        <p className="label">People from the same class</p>
-                    </div>
-                </li>
-            ))}
+                </div>
+            </div>
         </div>
     )
 }
 
-export default InformationStudent
+export default InformationStudent;

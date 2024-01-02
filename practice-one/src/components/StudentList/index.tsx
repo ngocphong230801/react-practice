@@ -1,12 +1,25 @@
-import React from 'react';
+import React ,{useState, useEffect} from 'react';
 import { StudentProfile } from "../../types";
 import "./index.css"
 
 interface ListStudentProps {
     students: StudentProfile[];
+    onStudentClick: (student: StudentProfile) => void;
 }
 
-const ListStudent: React.FC<ListStudentProps> = ({ students }) => {
+const ListStudent: React.FC<ListStudentProps> = ({ students, onStudentClick }) => {
+    const [activeStudentId, setActiveStudentId] = useState<number | null>(null);
+
+    useEffect(() => {
+        if (students.length > 0) {
+            setActiveStudentId(students[0].studentID);
+        }
+    }, [students]);
+
+    const handleStudentClick = (student: StudentProfile) => {
+        setActiveStudentId(student.studentID);
+        onStudentClick(student);
+    };
 
     return (
         <div className="list-student">
@@ -19,7 +32,10 @@ const ListStudent: React.FC<ListStudentProps> = ({ students }) => {
             </ul>
             <ul className="list-body">
                 {students.map((student, index) => (
-                    <li key={index} className={`student-row ${index % 2 !== 0 ? 'odd-row' : ''}`}>
+                    <li key={student.studentID}
+                        className={`student-row ${index % 2 !== 0 ? 'odd-row' : ''} ${activeStudentId === student.studentID ? 'active' : ''}`}
+                        onClick={() => handleStudentClick(student)}>
+                        <img src={student.imageUrl} alt="student-image" className='student-image'/>
                         <span className="student-name">{student.name}</span>
                         <span className="student-id">{student.studentID}</span>
                         <span className="student-email">{student.email}</span>

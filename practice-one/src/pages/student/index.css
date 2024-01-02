@@ -37,3 +37,35 @@
     z-index: 1500;
     background-color: rgba(61, 61, 61, 0.19);
 }
+
+.no-student {
+    position: fixed;
+    top: 225px;
+    left: 367px;
+    width: 952px;
+    height: 419px;
+    background-color: var(--background-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.empty-message {
+    color: var(--color-text-quaternary);
+    font-size: var(--font-size-text-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-top: 31px;
+}
+
+.enrollment-message {
+    color: var(--color-text-quaternary);
+    font-size: var(--font-size-text-md);
+    font-weight: var(--font-weight-light);
+    margin-top: 10px;
+}
+
+.student-page .btn-secondary {
+    position: absolute;
+    bottom: 19px;
+    right: 0;
+}

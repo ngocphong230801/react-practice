@@ -65,7 +65,52 @@
 
 .information-student .group-item {
     display: flex;
+    gap: 30px;
+    margin-top: 36px;
+}
+
+.information-student .label {
     color: var(--color-text-senary);
     font-size: var(--font-size-text-sm);
     font-weight: var(--font-weight-bold);
+}
+
+.information-student .item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 42px;
+}
+
+.info-student .contact {
+    color: var(--color-text-septenary);
+    font-size: var(--font-size-text-base);
+    font-weight: var(--font-weight-light);
+    margin-bottom: 23px;
+}
+
+.classmates-images {
+    display: flex;
+    align-items: center;
+}
+
+.classmate-image {
+    width: 38px;
+    height: 38px;
+    border-radius: 38px;
+    margin-left: -15px;
+    object-fit: cover;
+    margin-top: 17px;
+}
+
+.classmate-image:first-child {
+    margin-left: 0;
+}
+
+.more-classmates {
+    color: var(--color-text-quinary);
+    font-size: var(--font-size-text-sm);
+    font-weight: var(--font-weight-light);
+    margin-left: 10px;
+    margin-top: 18px;
 }

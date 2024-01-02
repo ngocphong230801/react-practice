@@ -1,4 +1,4 @@
-import { Logo, Feature, Active, } from "../../assets/icon";
+import { Logo, Feature} from "../../assets/icon";
 import "./SideBar.css";
 import "../../assets/icon/index";
 import { NavLink } from "react-router-dom";
@@ -16,7 +16,6 @@ const SideBar: React.FC = (): React.ReactElement => {
             <div className="sidebar-item">
               <img src={icon} alt={label} className="icon" />
               <span className="sidebar-item-content ">{label}</span>
-              {/* <img src= {Active} alt="active" className="active-icon" /> */}
             </div>
           </NavLink>
         </li>

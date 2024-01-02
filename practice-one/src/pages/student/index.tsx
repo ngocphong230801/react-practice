@@ -1,18 +1,21 @@
+import React, { useState, useEffect } from "react";
 import SideBar from "../../layouts/SideBar";
 import Header from "../../components/common/Header";
-import { Notify } from "../../components/Icon";
+import { CheckDown, Notify, Support } from "../../components/Icon";
 import Button from "../../components/common/Button";
-import "./index.css"
+import "./index.css";
 import ListStudent from "../../components/StudentList";
+import InformationStudent from "../../components/Infomation";
 import Input from "../../components/common/Input";
 import AddStudentForm from "../../components/Form";
-import { useState, useEffect } from "react";
 import { StudentProfile } from "../../types";
-import InformationStudent from "../../components/Infomation";
+import { EmptyPage } from "../../assets/image";
+
 
 const StudentPage: React.FC = (): React.ReactElement => {
     const [showAddStudentForm, setShowAddStudentForm] = useState(false);
     const [students, setStudents] = useState<StudentProfile[]>([]);
+    const [selectedStudent, setSelectedStudent] = useState<StudentProfile | null>(null);
 
     useEffect(() => {
         fetchStudents();
@@ -21,8 +24,12 @@ const StudentPage: React.FC = (): React.ReactElement => {
     const fetchStudents = () => {
         const storedStudents = JSON.parse(localStorage.getItem('students') || '[]');
         setStudents(storedStudents);
+        if (storedStudents.length > 0) {
+            setSelectedStudent(storedStudents[0]);
+        } else {
+            setSelectedStudent(null);
+        }
     };
-
 
     const handleAddStudentClick = () => {
         setShowAddStudentForm(!showAddStudentForm);
@@ -32,10 +39,13 @@ const StudentPage: React.FC = (): React.ReactElement => {
         setShowAddStudentForm(false);
     };
 
-
     const handleStudentAdded = () => {
         fetchStudents();
         handleCloseForm();
+    };
+
+    const handleStudentSelect = (student: StudentProfile) => {
+        setSelectedStudent(student);
     };
 
     return (
@@ -43,11 +53,13 @@ const StudentPage: React.FC = (): React.ReactElement => {
             <Header logOut="Logout" icon={<Notify />} />
             <SideBar />
             <a href="#" className="export-csv">Export CSV</a>
-            <Button
-                title="Add student"
-                className="btn-default btn-add-student"
-                onClick={handleAddStudentClick}
-            />
+            <div className={students.length === 0 ? "button-container-empty" : "button-container"}>
+                <Button
+                    title="Add student"
+                    className="btn-default btn-add-student"
+                    onClick={handleAddStudentClick}
+                />
+            </div>
             <div className="search-box">
                 <select className="filter">
                     <option value="default">Add filter</option>
@@ -60,11 +72,29 @@ const StudentPage: React.FC = (): React.ReactElement => {
                 />
             </div>
             {showAddStudentForm && <div className="overlay" onClick={handleCloseForm}></div>}
-            {showAddStudentForm && <AddStudentForm closeForm={handleCloseForm} onStudentAdd={handleStudentAdded} />}
-            <ListStudent students={students} />
-            <InformationStudent students={students} />
+            {showAddStudentForm && (
+                <AddStudentForm closeForm={handleCloseForm} onStudentAdd={handleStudentAdded} />
+            )}
+            {students.length === 0 ? (
+                <div className="no-student">
+                    <img src= {EmptyPage} alt="empty-page-image" />
+                    <h2 className="empty-message">No students at this time</h2>
+                    <p className="enrollment-message">Students will appear here after they enroll in your school.</p>
+                    <Button
+                        className="btn-secondary"
+                        title="Support"
+                        iconLeft={<Support />}
+                        iconRight={<CheckDown />}
+                    />
+                </div>
+            ) : (
+                <>
+                    <ListStudent students={students} onStudentClick={handleStudentSelect} />
+                    {selectedStudent && <InformationStudent student={selectedStudent} students={students} />}
+                </>
+            )}
         </div>
     );
 }
 
-export default StudentPage
+export default StudentPage;

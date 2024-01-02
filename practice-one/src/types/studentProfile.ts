@@ -6,6 +6,6 @@ export interface StudentProfile {
     gender: boolean;
     phone: number;
     password: string;
-    image: string;
+    imageUrl: string;
     studentAge: number;
 }

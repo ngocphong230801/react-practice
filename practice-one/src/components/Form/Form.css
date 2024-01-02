@@ -80,3 +80,21 @@
     color: red;
     margin-top: 3px;
 }
+
+.add-student-form .upload-img {
+    position: absolute;
+    bottom: 89px;
+    left: 500px
+}
+
+.add-student-form .img-preview {
+    position: absolute;
+    right: 220px;
+    bottom: 89px;
+}
+
+.add-student-form .error-img {
+    position: absolute;
+    bottom: 70px;
+    left: 500px;
+}

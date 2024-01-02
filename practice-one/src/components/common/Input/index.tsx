@@ -1,7 +1,7 @@
 import "./Input.css";
 import { Variant } from "../../../types/variant";
 
-import React, { ChangeEventHandler } from "react";
+import React, { ChangeEventHandler} from "react";
 
 type CustomInputProps = {
   placeholder?: string;
@@ -10,6 +10,7 @@ type CustomInputProps = {
   name?: string;
   value?: string;
   variant?: Variant;
+  ref?: any;
   onChange?: ChangeEventHandler<HTMLInputElement>;
 };
 
@@ -19,6 +20,7 @@ const Input: React.FC<CustomInputProps> = ({
   value,
   name,
   variant = Variant.DEFAULT,
+  ref,
   onChange,
 }) =>
    (
@@ -27,6 +29,7 @@ const Input: React.FC<CustomInputProps> = ({
       type="text"
       placeholder={placeholder}
       value={value}
+      ref={ref}
       name={name}
       onChange={onChange}
     />
