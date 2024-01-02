@@ -23,7 +23,6 @@ export const Primary: Story = {
     },
 };
 
-
 export const Secondary: Story = {
     args: {
       variant: Variant.SECONDARY,
