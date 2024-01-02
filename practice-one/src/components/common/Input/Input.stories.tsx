@@ -30,3 +30,4 @@ export const Secondary: Story = {
       className: "search-box",
     },
 };
+
