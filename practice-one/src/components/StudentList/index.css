@@ -1,7 +1,7 @@
 .list-student {
     margin-left: 279px;
     margin-top: 23px;
-    max-width: 776px;
+    max-width: 790px;
 }
 
 .list-student .list-header {
@@ -14,12 +14,16 @@
     font-weight: var(--font-weight-bold);
 }
 
+.list-student .name {
+    margin-left: 2px;
+}
+
 .list-student .id {
     margin-left: 150px;
 }
 
 .list-student .email {
-    margin-left: 50px;
+    margin-left: 60px;
 }
 
 .list-student .class {
@@ -27,7 +31,7 @@
 }
 
 .list-student .gender {
-    margin-left: 50px;
+    margin-left: 80px;
 }
 
 
@@ -65,28 +69,29 @@
 
 .list-student .student-id {
     position: absolute;
-    left: 185px;
+    left: 200px;
 }
 
 .list-student .student-email {
     position: absolute;
-    left: 285px;
+    left: 303px;
 }
 
 .list-student .student-class {
     position: absolute;
-    left: 520px;
+    left: 535px;
 }
 
 .list-student .student-gender {
     position: absolute;
-    left: 600px;
+    left: 643px;
 }
 
 .list-student .student-image {
     width: 24px;
     height: 24px;
     border-radius: 24px;
+    margin-left: 5px;
 }
 
 ::-webkit-scrollbar {

@@ -1,3 +1,7 @@
+.student-page .header {
+    background-color: var(--background-default);
+}
+
 .student-page .btn-add-student {
     position: absolute;
     left: 400px;
@@ -18,11 +22,19 @@
 .student-page .search-box {
     margin-top: 23px;
     display: flex;
+    align-items: center;
+}
+
+.student-page .icon-search {
+    display: block;
+    background-color: var(--background-secondary);
+    padding: 12.5px 9px;
+    padding-right: 0;
 }
 
 .student-page .filter {
     margin-left: 279px;
-    width: 132px;
+    width: 120px;
     align-items: center;
     color: var(--color-text-septenary);
     border: none;

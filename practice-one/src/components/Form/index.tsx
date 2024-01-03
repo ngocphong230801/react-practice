@@ -76,13 +76,13 @@ const AddStudentForm: React.FC<AddStudentFormProps> = ({ closeForm, onStudentAdd
     const handleClassesChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
         setClasses(value);
-        setClassError(value === "default" ? ERROR_MESSAGES.FIELD_EMPTY : "");
+        setClassError(value === "default" ? ERROR_MESSAGES.CLASS : "");
     };
     
     const handleGenderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
         setGender(value);
-        setGenderError(value === "default" ? ERROR_MESSAGES.FIELD_EMPTY : "");
+        setGenderError(value === "default" ? ERROR_MESSAGES.GENDER : "");
     };
     
     const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {

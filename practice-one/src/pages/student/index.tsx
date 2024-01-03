@@ -10,6 +10,7 @@ import Input from "../../components/common/Input";
 import AddStudentForm from "../../components/Form";
 import { StudentProfile } from "../../types";
 import { EmptyPage } from "../../assets/image";
+import { Search } from "../../assets/icon";
 
 
 const StudentPage: React.FC = (): React.ReactElement => {
@@ -64,6 +65,7 @@ const StudentPage: React.FC = (): React.ReactElement => {
                 <select className="filter">
                     <option value="default">Add filter</option>
                 </select>
+                <img src={Search} alt="icon-search" className="icon-search" />
                 <Input
                     className="input-secondary"
                     type="text"
