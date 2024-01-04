@@ -1,7 +1,6 @@
+import { ChangeEventHandler, forwardRef } from "react";
 import "./Input.css";
 import { Variant } from "../../../types/variant";
-
-import React, { ChangeEventHandler} from "react";
 
 type CustomInputProps = {
   placeholder?: string;
@@ -10,29 +9,21 @@ type CustomInputProps = {
   name?: string;
   value?: string;
   variant?: Variant;
-  ref?: any;
   onChange?: ChangeEventHandler<HTMLInputElement>;
 };
 
-const Input: React.FC<CustomInputProps> = ({
-  placeholder,
-  className,
-  value,
-  name,
-  variant = Variant.DEFAULT,
-  ref,
-  onChange,
-}) =>
-   (
+const Input = forwardRef<HTMLInputElement, CustomInputProps>(
+  ({ placeholder, className, value, name, type, variant = Variant.DEFAULT, onChange }, ref) => (
     <input
       className={`${className} input input-${variant}`}
-      type="text"
+      type={type}
       placeholder={placeholder}
       value={value}
-      ref={ref}
       name={name}
       onChange={onChange}
+      ref={ref} 
     />
-  );
+  )
+);
 
 export default Input;
