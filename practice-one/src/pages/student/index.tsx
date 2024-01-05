@@ -67,7 +67,7 @@ const StudentPage: React.FC = (): React.ReactElement => {
                 </select>
                 <img src={Search} alt="icon-search" className="icon-search" />
                 <Input
-                    className="input-secondary"
+                    className="secondary"
                     type="text"
                     name="search-box"
                     placeholder="Search for a student by name or email"
