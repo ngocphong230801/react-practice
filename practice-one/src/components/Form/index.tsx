@@ -1,9 +1,15 @@
+// react
 import React, { useRef, useState } from "react";
 import { useForm } from 'react-hook-form';
+// css
 import "./Form.css";
+// components
 import Button from "../common/Button";
 import Input from "../common/Input";
-import { uploadImage } from "../../helpers/uploadImage";
+import DropdownSelect from "../Dropdown";
+// helpers
+import { uploadImage } from "@helpers/uploadImage";
+
 
 interface StudentFormProps {
     closeForm: () => void;
@@ -33,13 +39,15 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
         console.log("Form Submitted", data);
         let uploadedImageUrl = null;
         if (imageFile) {
-            try {
-                uploadedImageUrl = await uploadImage(imageFile);
-            } catch (error) {
-                console.error("Error uploading image:", error);
+            const uploadResult = await uploadImage(imageFile);
+    
+            if (uploadResult.error) {
+                console.error("Error uploading image:", uploadResult.error);
+            } else {
+                uploadedImageUrl = uploadResult.data;
             }
         }
-
+    
         const newStudentData = {
             ...data,
             studentID: Math.floor(10000 + Math.random() * 90000),
@@ -62,6 +70,19 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
         }
     };
 
+    const genderOptions = [
+        { value: 'Male', label: 'Male' },
+        { value: 'Female', label: 'Female' },
+    ];
+
+    const classOptions = [
+        { value: 'SS1', label: 'SS1' },
+        { value: 'SS2', label: 'SS2' },
+        { value: 'SS3', label: 'SS3' },
+        { value: 'SS4', label: 'SS4' },
+        { value: 'SS5', label: 'SS5' },
+    ];
+
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="add-student-form">
             <div className="form-header">
@@ -78,39 +99,28 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                         <p className="item-title">Name</p>
                         <Input
                             {...register("name", { required: "Name is required" })}
-                            className="input-default"
+                            className="default"
                             type="text"
                             name="name"
                         />
                         {errors.name && <span className="error-message">{errors.name.message}</span>}
                     </div>
-
-                    <div className="class-student item">
-                        <p className="item-title">Class</p>
-                        <select
-                            {...register("classes", { required: "Class is required" })}
-                            name="classes"
-                            className="select-item">
-                            <option value="">Class</option>
-                            <option value="SS1">SS1</option>
-                            <option value="SS2">SS2</option>
-                            <option value="SS3">SS3</option>
-                            <option value="SS4">SS4</option>
-                            <option value="SS5">SS5</option>
-                        </select>
-                        {errors.classes && <span className="error-message">{errors.classes.message}</span>}
-                    </div>
-
-                    <div className="gender-student item">
-                        <p className="item-title">Gender</p>
-                        <select {...register("gender", { required: "Gender is required" })}
-                            className="select-item">
-                            <option value="">Gender</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
-                        {errors.gender && <span className="error-message">{errors.gender.message}</span>}
-                    </div>
+                    <DropdownSelect
+                        name="classes"
+                        label="Class"
+                        options={classOptions}
+                        register={register}
+                        requiredMessage="Class is required"
+                        errors={errors}
+                    />
+                    <DropdownSelect
+                        name="gender"
+                        label="Gender"
+                        options={genderOptions}
+                        register={register}
+                        requiredMessage="Gender is required"
+                        errors={errors}
+                    />
                 </div>
                 <div className="form-body-item">
 
@@ -118,18 +128,17 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                         <p className="item-title">Email</p>
                         <Input
                             {...register("email", { required: "Email is required" })}
-                            className="input-primary"
+                            className="primary"
                             type="email"
                             name="email"
                         />
                         {errors.email && <span className="error-message">{errors.email.message}</span>}
                     </div>
-
                     <div className="student-phone item">
                         <p className="item-title">Phone</p>
                         <Input
                             {...register("phone", { required: "Phone is required" })}
-                            className="input-primary"
+                            className="primary"
                             type="text"
                             name="phone"
                         />
@@ -141,7 +150,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                     <p className="item-title">Password</p>
                     <Input
                         {...register("password", { required: "Password is required" })}
-                        className="input-primary"
+                        className="primary"
                         type="password"
                         name="password"
                     />

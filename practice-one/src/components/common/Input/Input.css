@@ -5,12 +5,12 @@
     border: 0.5px solid var(--color-text-septenary);
 }
 
-.input-primary {
+.primary {
     width: 325px;
     height: 42px;
 }
 
-.input-secondary {
+.secondary {
     width: 645px;
     padding: 16px 20px 16px 16px;
     background-color: var(--background-secondary);
@@ -18,6 +18,6 @@
     border: none;
 }
 
-.input-secondary:focus {
+.secondary:focus {
     outline: none;
 }
