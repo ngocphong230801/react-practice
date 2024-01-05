@@ -7,14 +7,14 @@ import "./index.css";
 import ListStudent from "../../components/StudentList";
 import InformationStudent from "../../components/Infomation";
 import Input from "../../components/common/Input";
-import AddStudentForm from "../../components/Form";
+import StudentForm from "../../components/Form";
 import { StudentProfile } from "../../types";
 import { EmptyPage } from "../../assets/image";
 import { Search } from "../../assets/icon";
 
 
 const StudentPage: React.FC = (): React.ReactElement => {
-    const [showAddStudentForm, setShowAddStudentForm] = useState(false);
+    const [showStudentForm, setShowStudentForm] = useState(false);
     const [students, setStudents] = useState<StudentProfile[]>([]);
     const [selectedStudent, setSelectedStudent] = useState<StudentProfile | null>(null);
 
@@ -33,11 +33,11 @@ const StudentPage: React.FC = (): React.ReactElement => {
     };
 
     const handleAddStudentClick = () => {
-        setShowAddStudentForm(!showAddStudentForm);
+        setShowStudentForm(!showStudentForm);
     };
 
     const handleCloseForm = () => {
-        setShowAddStudentForm(false);
+        setShowStudentForm(false);
     };
 
     const handleStudentAdded = () => {
@@ -73,9 +73,9 @@ const StudentPage: React.FC = (): React.ReactElement => {
                     placeholder="Search for a student by name or email"
                 />
             </div>
-            {showAddStudentForm && <div className="overlay" onClick={handleCloseForm}></div>}
-            {showAddStudentForm && (
-                <AddStudentForm closeForm={handleCloseForm} onStudentAdd={handleStudentAdded} />
+            {showStudentForm && <div className="overlay" onClick={handleCloseForm}></div>}
+            {showStudentForm && (
+                <StudentForm closeForm={handleCloseForm} onStudentAdd={handleStudentAdded} />
             )}
             {students.length === 0 ? (
                 <div className="no-student">

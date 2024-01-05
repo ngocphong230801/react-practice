@@ -5,7 +5,7 @@ import Button from "../common/Button";
 import Input from "../common/Input";
 import { uploadImage } from "../../helpers/uploadImage";
 
-interface AddStudentFormProps {
+interface StudentFormProps {
     closeForm: () => void;
     onStudentAdd: () => void;
 }
@@ -19,7 +19,7 @@ interface IFormInput {
     classes: string;
 }
 
-const AddStudentForm: React.FC<AddStudentFormProps> = ({ closeForm, onStudentAdd }) => {
+const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) => {
     const {
         register,
         handleSubmit,
@@ -173,4 +173,4 @@ const AddStudentForm: React.FC<AddStudentFormProps> = ({ closeForm, onStudentAdd
     );
 };
 
-export default AddStudentForm;
+export default StudentForm;
