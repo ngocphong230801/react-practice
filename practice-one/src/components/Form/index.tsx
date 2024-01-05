@@ -11,7 +11,7 @@ import DropdownSelect from "../Dropdown";
 import { uploadImage } from "@helpers/uploadImage";
 
 
-interface StudentFormProps {
+export interface StudentFormProps {
     closeForm: () => void;
     onStudentAdd: () => void;
 }

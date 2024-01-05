@@ -3,7 +3,7 @@ import { StudentProfile } from "../../types";
 import { Email, Phone, Teacher } from "../../assets/icon";
 import "./Information.css"
 
-interface InformationStudentProps {
+export interface InformationStudentProps {
     student: StudentProfile;
     students: StudentProfile[];
 }

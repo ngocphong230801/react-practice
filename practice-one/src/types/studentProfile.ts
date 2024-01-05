@@ -3,7 +3,7 @@ export interface StudentProfile {
     studentID: number;
     email: string;
     classes: string;
-    gender: boolean;
+    gender: string
     phone: number;
     password: string;
     imageUrl: string;

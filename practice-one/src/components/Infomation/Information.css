@@ -5,6 +5,7 @@
     bottom: 20px;
     z-index: 1000;
     width: 313px;
+    background-color: var(--background-default);
 }
 
 .information-student .info-student {
