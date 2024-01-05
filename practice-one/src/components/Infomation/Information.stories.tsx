@@ -22,7 +22,6 @@ const sampleStudents: StudentProfile[] = [
   { ...sampleStudent, studentID: 3147, name: 'Phong Nguyen', imageUrl: 'https://i.ibb.co/HqTbBRY/avt2.jpg' },
 ];
 
-
 export default {
   title: 'Components/InformationStudent',
   component: InformationStudent,

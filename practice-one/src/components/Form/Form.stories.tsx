@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import StudentForm, { StudentFormProps } from './index';
-import "../../index.css"
-
+import "./Form.css"
 export default {
     title: 'Components/StudentForm',
     component: StudentForm,
