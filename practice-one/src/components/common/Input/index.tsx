@@ -13,9 +13,9 @@ type CustomInputProps = {
 };
 
 const Input = forwardRef<HTMLInputElement, CustomInputProps>(
-  ({ placeholder, className, value, name, type, variant = Variant.DEFAULT, onChange }, ref) => (
+  ({ placeholder, className, value, name, type, variant = Variant, onChange }, ref) => (
     <input
-      className={`${className} input input-${variant}`}
+      className={`${className} input ${variant}`}
       type={type}
       placeholder={placeholder}
       value={value}
