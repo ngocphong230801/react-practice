@@ -81,3 +81,36 @@
     bottom: 19px;
     right: 0;
 }
+
+.student-page .student-controls-empty {
+    margin-left: 279px;
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    max-width: 1040px;
+}
+
+.student-page .student-action-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.student-page .student-section-title {
+    color: var(--color-text-quaternary);
+    font-size: var(--font-size-text-md);
+    font-weight: var(--font-weight-light);
+}
+
+.student-page .export-csv-empty {
+    color: var(--color-text-tertiary);
+    font-size: var(--font-size-text-base);
+    font-weight: var(--font-weight-semibold);
+}
+
+.student-page .search-box-empty {
+    margin-top: 23px;
+    display: flex;
+    align-items: center;
+    margin-left: 87px;
+}

@@ -51,7 +51,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
     
         const newStudentData = {
             ...data,
-            studentID: Math.floor(10000 + Math.random() * 90000),
+            studentID: Math.floor(10000 + Math.random() * 90000),       
             studentAge: "17",
             imageUrl: uploadedImageUrl
         };

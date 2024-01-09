@@ -61,33 +61,70 @@ const StudentPage: React.FC = (): React.ReactElement => {
         <div className="student-page">
             <Header logOut="Logout" icon={<Notify />} />
             <SideBar />
-            <a href="#" className="export-csv">Export CSV</a>
-            <div className={students.length === 0 ? "button-container-empty" : "button-container"}>
-                <Button
-                    title="Add student"
-                    className="btn-default btn-add-student"
-                    onClick={handleAddStudentClick}
-                />
-            </div>
-            <div className="search-box">
-                <select className="filter">
-                    <option value="default">Add filter</option>
-                </select>
-                <img src={Search} alt="icon-search" className="icon-search" />
-                <Input
-                    className="secondary"
-                    type="text"
-                    name="search-box"
-                    placeholder="Search for a student by name or email"
-                />
-            </div>
+
+            {students.length === 0 ? (
+                <>
+                    <div className="student-controls-empty">
+                        <p className="student-section-title">Students</p>
+                        <div className="student-action-container">
+                            <a href="#" className="export-csv-empty">Export CSV</a>
+                            <div className="button-container-empty">
+                                <Button
+                                    title="Add student"
+                                    className="btn-default btn-add-student-empty"
+                                    onClick={handleAddStudentClick}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="search-box-empty">
+                        <select className="filter">
+                            <option value="default">Add filter</option>
+                        </select>
+                        <img src={Search} alt="icon-search" className="icon-search" />
+                        <Input
+                            className="secondary"
+                            type="text"
+                            name="search-box"
+                            placeholder="Search for a student by name or email"
+                        />
+                    </div>
+
+                </>
+            ) : (
+                <>
+                    <a href="#" className="export-csv">Export CSV</a>
+                    <div className="button-container">
+                        <Button
+                            title="Add student"
+                            className="btn-default btn-add-student"
+                            onClick={handleAddStudentClick}
+                        />
+                    </div>
+                    <div className="search-box">
+                        <select className="filter">
+                            <option value="default">Add filter</option>
+                        </select>
+                        <img src={Search} alt="icon-search" className="icon-search" />
+                        <Input
+                            className="secondary"
+                            type="text"
+                            name="search-box"
+                            placeholder="Search for a student by name or email"
+                        />
+                    </div>
+                </>
+            )}
+
             {showStudentForm && <div className="overlay" onClick={handleCloseForm}></div>}
             {showStudentForm && (
                 <StudentForm closeForm={handleCloseForm} onStudentAdd={handleStudentAdded} />
             )}
+
             {students.length === 0 ? (
                 <div className="no-student">
-                    <img src= {EmptyPage} alt="empty-page-image" />
+                    <img src={EmptyPage} alt="empty-page-image" />
                     <h2 className="empty-message">No students at this time</h2>
                     <p className="enrollment-message">Students will appear here after they enroll in your school.</p>
                     <Button
