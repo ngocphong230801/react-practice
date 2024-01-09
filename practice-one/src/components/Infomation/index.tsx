@@ -29,7 +29,7 @@ const InformationStudent: React.FC<InformationStudentProps> = ({ student, studen
                 <div className="group-item">
                     <div className="age-item item">
                         <p className="label">Age</p>
-                        <span className="student-age contact">{student.studentAge}</span>
+                        <span className="student-age contact">{student.age}</span>
                     </div>
                     <div className="gender-item item">
                         <p className="label">Gender</p>

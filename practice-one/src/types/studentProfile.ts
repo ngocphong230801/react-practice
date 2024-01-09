@@ -7,5 +7,5 @@ export interface StudentProfile {
     phone: number;
     password: string;
     imageUrl: string;
-    studentAge: number;
+    age: number;
 }

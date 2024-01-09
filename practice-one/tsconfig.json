@@ -22,7 +22,8 @@
 
     "baseUrl": ".",
     "paths": {
-      "@helpers/*": ["src/helpers/*"]
+      "@helpers/*": ["src/helpers/*"],
+      "@constants/*": ["src/constants/*"]
     }
 
   },

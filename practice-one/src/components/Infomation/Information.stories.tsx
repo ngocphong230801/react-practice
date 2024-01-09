@@ -8,7 +8,7 @@ const sampleStudent: StudentProfile = {
   studentID: 98898,
   name: 'John Doe',
   imageUrl: 'https://i.ibb.co/MR3sF65/avt1.jpg',
-  studentAge: 17,
+  age: 17,
   gender: "Male",
   phone: 979245571,
   email: 'nnphong962015@gmail.com',
