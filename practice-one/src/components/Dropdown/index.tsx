@@ -6,6 +6,7 @@ interface DropdownSelectProps {
     options: { value: string; label: string }[];
     control: Control<any>; // Import Control from react-hook-form
     requiredMessage: string;
+    error?: string | null;
 }
 
 const DropdownSelect: React.FC<DropdownSelectProps> = ({
@@ -14,6 +15,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
     options,
     control,
     requiredMessage,
+    error,
 }) => {
     return (
         <div className={`${name}-select item`}>
@@ -23,14 +25,17 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
                 control={control}
                 rules={{ required: requiredMessage }}
                 render={({ field }) => (
-                    <select {...field} className="select-item">
-                        <option value="">{label}</option>
-                        {options.map(option => (
-                            <option key={option.value} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </select>
+                    <>
+                        <select {...field} className={`select-item ${error ? 'has-error' : ''}`}>
+                            <option value="">{label}</option>
+                            {options.map(option => (
+                                <option key={option.value} value={option.value}>
+                                    {option.label}
+                                </option>
+                            ))}
+                        </select>
+                        {error && <span className="error-message">{error}</span>} {/* Display error message */}
+                    </>
                 )}
             />
         </div>

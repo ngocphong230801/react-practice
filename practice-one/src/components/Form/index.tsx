@@ -128,8 +128,8 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                             options={CLASS_OPTIONS}
                             control={control}
                             requiredMessage="Please choose class"
+                            error={errors.classes ? errors.classes.message : null}
                         />
-                        {errors.classes && <span className="error-message">{errors.classes.message}</span>}
                     </div>
                     <div className="student-gender item">
                         <DropdownSelect
@@ -138,8 +138,8 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                             options={GENDER_OPTIONS}
                             control={control}
                             requiredMessage="Please choose gender"
+                            error={errors.gender ? errors.gender.message : null}
                         />
-                        {errors.gender && <span className="error-message">{errors.gender.message}</span>}
                     </div>
                 </div>
                 <div className="form-body-item">

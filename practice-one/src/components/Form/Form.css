@@ -76,7 +76,7 @@
     color: red; 
     margin-top: 5px;
     font-size: var(--font-size-text-base);
-  }
+}
 
 .add-student-form .upload-img {
     position: absolute;
