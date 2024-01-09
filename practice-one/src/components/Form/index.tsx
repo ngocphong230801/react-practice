@@ -49,7 +49,6 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
             }
         }
     
-        // Tạo dữ liệu học sinh mới với imageUrl nếu có
         const newStudentData = {
             ...data,
             studentID: Math.floor(10000 + Math.random() * 90000),
@@ -57,7 +56,6 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
             imageUrl: uploadedImageUrl
         };
     
-        // Gửi dữ liệu đến API
         try {
             const result = await addStudentToAPI(newStudentData);
             if (result) {
