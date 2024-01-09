@@ -260,6 +260,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                     onClick={() => fileInputRef.current?.click()}
                 />
                 {imagePreviewUrl && <img src={imagePreviewUrl} alt="Preview" className="image-preview" />}
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
                 <Button
                     className="btn-primary"
                     title="Add Student"
