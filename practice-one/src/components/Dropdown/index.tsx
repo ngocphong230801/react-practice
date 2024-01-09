@@ -1,34 +1,38 @@
-import React from 'react';
+import { Controller, Control } from 'react-hook-form';
 
 interface DropdownSelectProps {
     name: string;
     label: string;
     options: { value: string; label: string }[];
-    register: any; // react-hook-form
+    control: Control<any>; // Import Control from react-hook-form
     requiredMessage: string;
-    errors: any; // react-hook-form
 }
 
 const DropdownSelect: React.FC<DropdownSelectProps> = ({
     name,
     label,
     options,
-    register,
+    control,
     requiredMessage,
-    errors
 }) => {
     return (
         <div className={`${name}-select item`}>
             <p className="item-title">{label}</p>
-            <select {...register(name, { required: requiredMessage })} className="select-item">
-                <option value="">{label}</option>
-                {options.map(option => (
-                    <option key={option.value} value={option.value}>
-                        {option.label}
-                    </option>
-                ))}
-            </select>
-            {errors[name] && <span className="error-message">{errors[name].message}</span>}
+            <Controller
+                name={name}
+                control={control}
+                rules={{ required: requiredMessage }}
+                render={({ field }) => (
+                    <select {...field} className="select-item">
+                        <option value="">{label}</option>
+                        {options.map(option => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </select>
+                )}
+            />
         </div>
     );
 };
