@@ -9,7 +9,7 @@ import Input from "../common/Input";
 import DropdownSelect from "../Dropdown";
 // helpers
 import { uploadImage } from "@helpers/uploadImage";
-
+import { addStudentToAPI } from "@helpers/api";
 
 export interface StudentFormProps {
     closeForm: () => void;
@@ -37,30 +37,41 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
 
     const onSubmit = async (data: IFormInput) => {
         console.log("Form Submitted", data);
+    
         let uploadedImageUrl = null;
         if (imageFile) {
-            const uploadResult = await uploadImage(imageFile);
-    
-            if (uploadResult.error) {
-                console.error("Error uploading image:", uploadResult.error);
-            } else {
+            try {
+                const uploadResult = await uploadImage(imageFile);
                 uploadedImageUrl = uploadResult.data;
+            } catch (error) {
+                console.error("Error uploading image:", error);
+                return;
             }
         }
     
+        // Tạo dữ liệu học sinh mới với imageUrl nếu có
         const newStudentData = {
             ...data,
             studentID: Math.floor(10000 + Math.random() * 90000),
             studentAge: "17",
             imageUrl: uploadedImageUrl
         };
-
-        const students = JSON.parse(localStorage.getItem('students') || '[]');
-        students.push(newStudentData);
-        localStorage.setItem('students', JSON.stringify(students));
-        onStudentAdd();
-        closeForm();
+    
+        // Gửi dữ liệu đến API
+        try {
+            const result = await addStudentToAPI(newStudentData);
+            if (result) {
+                console.log("Student added successfully:", result);
+                onStudentAdd();
+                closeForm();
+            } else {
+                console.error("Failed to add student");
+            }
+        } catch (error) {
+            console.error("Error in onSubmit:", error);
+        }
     };
+    
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files && event.target.files[0];

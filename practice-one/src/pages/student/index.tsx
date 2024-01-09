@@ -22,13 +22,21 @@ const StudentPage: React.FC = (): React.ReactElement => {
         fetchStudents();
     }, []);
 
-    const fetchStudents = () => {
-        const storedStudents = JSON.parse(localStorage.getItem('students') || '[]');
-        setStudents(storedStudents);
-        if (storedStudents.length > 0) {
-            setSelectedStudent(storedStudents[0]);
-        } else {
-            setSelectedStudent(null);
+    const fetchStudents = async () => {
+        try {
+            const response = await fetch("https://657bfea7394ca9e4af152952.mockapi.io/api/students/students");
+            if (!response.ok) {
+                throw new Error('Error fetching students');
+            }
+            const studentsData = await response.json();
+            setStudents(studentsData);
+            if (studentsData.length > 0) {
+                setSelectedStudent(studentsData[0]);
+            } else {
+                setSelectedStudent(null);
+            }
+        } catch (error) {
+            console.error('Error:', error);
         }
     };
 
