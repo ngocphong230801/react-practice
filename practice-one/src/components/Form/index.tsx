@@ -25,27 +25,32 @@ interface IFormInput {
     gender: string;
     password: string;
     classes: string;
-    age: string;
+    age: number;
 }
 
 const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) => {
     const {
         control,
         handleSubmit,
-        formState: { errors, isValid, isDirty }
+        formState: { errors }
     } = useForm<IFormInput>({ mode: 'onChange' });
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const onSubmit = async (data: IFormInput) => {
         let uploadedImageUrl = null;
         if (imageFile) {
             try {
                 const uploadResult = await uploadImage(imageFile);
+                setIsSubmitting(true);
                 uploadedImageUrl = uploadResult.data;
             } catch (error) {
                 console.error("Error uploading image:", error);
+                setErrorMessage("Failed to upload image. Please try again.");
+                setIsSubmitting(false);
                 return;
             }
         }
@@ -63,12 +68,15 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                 closeForm();
             } else {
                 console.error("Failed to add student");
+                setErrorMessage("Failed to add student. Please try again.");
             }
         } catch (error) {
             console.error("Error in onSubmit:", error);
+            setErrorMessage("An error occurred. Please try again.");
+        } finally {
+            setIsSubmitting(false);
         }
     };
-
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files && event.target.files[0];
@@ -100,10 +108,18 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                         <Controller
                             name="name"
                             control={control}
-                            rules={{ required: "Name is required" }}
-                            render={({ field }) => <Input {...field} className="default" type="text" />}
+                            rules={{
+                                required: "Name is required",
+                            }}
+                            render={({ field }) => (
+                                <Input
+                                    {...field}
+                                    className="default"
+                                    type="text"
+                                    error={errors.name ? errors.name.message : null}
+                                />
+                            )}
                         />
-                        {errors.name && <span className="error-message">{errors.name.message}</span>}
                     </div>
                     <div className="student-class item">
                         <DropdownSelect
@@ -111,7 +127,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                             label="Class"
                             options={CLASS_OPTIONS}
                             control={control}
-                            requiredMessage="Class is required"
+                            requiredMessage="Please choose class"
                         />
                         {errors.classes && <span className="error-message">{errors.classes.message}</span>}
                     </div>
@@ -121,7 +137,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                             label="Gender"
                             options={GENDER_OPTIONS}
                             control={control}
-                            requiredMessage="Gender is required"
+                            requiredMessage="Please choose gender"
                         />
                         {errors.gender && <span className="error-message">{errors.gender.message}</span>}
                     </div>
@@ -132,20 +148,40 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                         <Controller
                             name="email"
                             control={control}
-                            rules={{ required: "Email is required" }}
-                            render={({ field }) => <Input {...field} className="primary" type="email" />}
+                            rules={{
+                                required: "Email is required",
+                                pattern: {
+                                    value: /^[A-Za-z0-9._%+-]+@gmail\.com$/,
+                                    message: "Invalid email format. Only @gmail.com addresses are allowed.",
+                                },
+                            }}
+                            render={({ field }) => (
+                                <Input
+                                    {...field}
+                                    className="primary"
+                                    type="email"
+                                    error={errors.email ? errors.email.message : null}
+                                />
+                            )}
                         />
-                        {errors.email && <span className="error-message">{errors.email.message}</span>}
                     </div>
                     <div className="student-phone item">
                         <p className="item-title">Phone</p>
                         <Controller
                             name="phone"
                             control={control}
-                            rules={{ required: "Phone is required" }}
-                            render={({ field }) => <Input {...field} className="primary" type="text" />}
+                            rules={{
+                                required: "Phone is required",
+                            }}
+                            render={({ field }) => (
+                                <Input
+                                    {...field}
+                                    className="primary"
+                                    type="text"
+                                    error={errors.phone ? errors.phone.message : null}
+                                />
+                            )}
                         />
-                        {errors.phone && <span className="error-message">{errors.phone.message}</span>}
                     </div>
                 </div>
                 <div className="form-body-item">
@@ -154,11 +190,32 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                         <Controller
                             name="password"
                             control={control}
-                            rules={{ required: "Password is required" }}
-                            render={({ field }) => <Input {...field} className="primary" type="password" />}
+                            rules={{
+                                required: "Password is required",
+                                validate: {
+                                    validPassword: (value) => {
+                                        const hasValidLength = value.length >= 8;
+                                        const hasLetter = /[a-zA-Z]/.test(value);
+
+                                        if (!hasValidLength || !hasLetter) {
+                                            return "Ex: 23082001a";
+                                        }
+
+                                        return true;
+                                    },
+                                },
+                            }}
+                            render={({ field }) => (
+                                <Input
+                                    {...field}
+                                    className="primary"
+                                    type="password"
+                                    error={errors.password ? errors.password.message : null}
+                                />
+                            )}
                         />
-                        {errors.password && <span className="error-message">{errors.password.message}</span>}
                     </div>
+
                     <div className="student-age item">
                         <p className="item-title">Age</p>
                         <Controller
@@ -166,10 +223,28 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                             control={control}
                             rules={{
                                 required: "Age is required",
+                                validate: {
+                                    validAge: (value) => {
+                                        const age = parseInt(String(value), 10);
+                                        if (isNaN(age)) {
+                                            return "Age must be a number";
+                                        }
+                                        if (age < 15 || age > 20) {
+                                            return "Age must be between 15 and 20";
+                                        }
+                                        return true;
+                                    },
+                                },
                             }}
-                            render={({ field }) => <Input {...field} className="primary" type="text" />}
+                            render={({ field }) => (
+                                <Input
+                                    {...field}
+                                    className="primary"
+                                    type="text"
+                                    error={errors.age ? errors.age.message : null}
+                                />
+                            )}
                         />
-                        {errors.age && <span className="error-message">{errors.age.message}</span>}
                     </div>
                 </div>
                 <input
@@ -185,11 +260,12 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                     onClick={() => fileInputRef.current?.click()}
                 />
                 {imagePreviewUrl && <img src={imagePreviewUrl} alt="Preview" className="image-preview" />}
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
                 <Button
-                     className="btn-primary"
-                     title="Add Student"
-                     buttonType="submit"
-                     disabled={!isValid || !isDirty}
+                    className="btn-primary"
+                    title="Add Student"
+                    buttonType="submit"
+                    disabled={isSubmitting}
                 />
             </div>
         </form>

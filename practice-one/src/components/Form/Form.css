@@ -57,10 +57,6 @@
     font-size: var(--font-size-text-base);
 }
 
-.add-student-form .studen-password {
-    margin-left: 81px;
-}
-
 .add-student-form .select-item {
     width: 179px;
     height: 42px;
@@ -75,10 +71,12 @@
 }
 
 
-.add-student-form .error-message {
-    color: red;
+.error-message {
+    display: block; 
+    color: red; 
     margin-top: 5px;
-}
+    font-size: var(--font-size-text-base);
+  }
 
 .add-student-form .upload-img {
     position: absolute;
