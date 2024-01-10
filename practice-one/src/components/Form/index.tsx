@@ -13,10 +13,10 @@ import DropdownSelect from "../Dropdown";
 // helpers
 import { uploadImage } from "@helpers/uploadImage";
 import { addStudentToAPI } from "@helpers/api";
-import { validationRules } from "@helpers/validateForm";
 
 // constants
 import { GENDER_OPTIONS, CLASS_OPTIONS } from "@constants/dropdownData";
+import { validationRules } from "@helpers/validateForm";
 
 export interface StudentFormProps {
     closeForm: () => void;
@@ -52,9 +52,9 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
     });
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [imageFile, setImageFile] = useState<File | null>(null);
-    const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+    const [imagePreviewUrl, setImagePreviewUrl] = useState<string>('');
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [errorMessage, setErrorMessage] = useState<string | null>(null)
+    const [errorMessage, setErrorMessage] = useState<string>('');
 
     const onSubmit = async (data: IFormInput) => {
         let uploadedImageUrl = null;
@@ -147,8 +147,8 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                             options={CLASS_OPTIONS}
                             control={control}
                             requiredMessage="Please choose class"
+                            error={errors.classes ? errors.classes.message : null}
                         />
-                        {errors.classes && <span className="error-message">{errors.classes.message}</span>}
                     </div>
                     <div className="student-gender item">
                         <DropdownSelect
@@ -157,8 +157,8 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                             options={GENDER_OPTIONS}
                             control={control}
                             requiredMessage="Please choose gender"
+                            error={errors.gender ? errors.gender.message : null}
                         />
-                        {errors.gender && <span className="error-message">{errors.gender.message}</span>}
                     </div>
                 </div>
                 <div className="form-body-item">
