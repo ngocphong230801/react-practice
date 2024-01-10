@@ -1,0 +1,118 @@
+.information-student {
+    position: fixed;
+    top: 105px;
+    left: 1075px;
+    bottom: 20px;
+    z-index: 1000;
+    width: 313px;
+    background-color: var(--background-default);
+}
+
+.information-student .info-student {
+    display: flex;
+    flex-direction: column;
+}
+
+.information-student .student-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 180px;
+    margin-top: 12px;
+    margin-left: 67px;
+}
+
+
+.information-student .student-id {
+    margin-top: 74px;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-text-md);
+    font-weight: var(--font-weight-light);
+    margin-left: 129px;
+}
+
+.information-student .name-item {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.information-student .student-name {
+    color: var(--color-text-senary);
+    font-size: var(--font-size-text-md);
+    font-weight: var(--font-weight-bold);
+}
+
+.information-student .science-student {
+    color: var(--color-text-septenary);
+    font-size: var(--font-size-text-base);
+    font-weight: var(--font-weight-light);
+    margin-top: 10px;
+}
+
+.information-student .icon-item {
+    display: flex;
+    gap: 15px;
+    margin-top: 32px;
+    margin-left: 88px;
+}
+
+.information-student .info-student .icon {
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+    background-color: var(--background-quaternary);
+    border-radius: 8px;
+}
+
+.information-student .group-item {
+    display: flex;
+    gap: 30px;
+    margin-top: 36px;
+}
+
+.information-student .label {
+    color: var(--color-text-senary);
+    font-size: var(--font-size-text-sm);
+    font-weight: var(--font-weight-bold);
+}
+
+.information-student .item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 42px;
+}
+
+.information-student .contact {
+    color: var(--color-text-septenary);
+    font-size: var(--font-size-text-base);
+    font-weight: var(--font-weight-light);
+    margin-bottom: 23px;
+}
+
+.information-student .classmates-images {
+    display: flex;
+    align-items: center;
+}
+
+.information-student .classmate-image {
+    width: 38px;
+    height: 38px;
+    border-radius: 38px;
+    margin-left: -15px;
+    object-fit: cover;
+    margin-top: 17px;
+}
+
+.information-student .classmate-image:first-child {
+    margin-left: 0;
+}
+
+.information-student .more-classmates {
+    color: var(--color-text-quinary);
+    font-size: var(--font-size-text-sm);
+    font-weight: var(--font-weight-light);
+    margin-left: 10px;
+    margin-top: 18px;
+}
