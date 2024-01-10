@@ -1,0 +1,111 @@
+.list-student {
+    margin-left: 279px;
+    margin-top: 23px;
+    max-width: 790px;
+}
+
+.list-student .list-header {
+    display: flex;
+}
+
+.list-student .list-header-item {
+    color: var(--color-text-primary);
+    font-size: var(--font-size-text-sm);
+    font-weight: var(--font-weight-bold);
+}
+
+.list-student .name {
+    margin-left: 2px;
+}
+
+.list-student .id {
+    margin-left: 150px;
+}
+
+.list-student .email {
+    margin-left: 60px;
+}
+
+.list-student .class {
+    margin-left: 150px;
+}
+
+.list-student .gender {
+    margin-left: 80px;
+}
+
+
+.list-student .list-body {
+    margin-top: 35px;
+    max-height: 70vh;
+    overflow: auto;
+}
+
+.list-student .student-row {
+    display: flex;
+    align-items: center;
+    color: var(--color-text-quaternary);
+    font-size: var(--font-size-text-sm);
+    font-weight: var(--font-weight-light);
+    position: relative;
+    height: 48px;
+    cursor: pointer;
+}
+
+.list-student .odd-row {
+    background-color:rgba(235, 246, 255, 0.50);
+}
+
+
+.student-row.active {
+    background-color: var(--background-primary);
+    color: var(--color-text-default);
+}
+
+
+.list-student .student-name {
+    margin-left: 5px;
+}
+
+.list-student .student-id {
+    position: absolute;
+    left: 200px;
+}
+
+.list-student .student-email {
+    position: absolute;
+    left: 303px;
+}
+
+.list-student .student-class {
+    position: absolute;
+    left: 535px;
+}
+
+.list-student .student-gender {
+    position: absolute;
+    left: 643px;
+}
+
+.list-student .student-image {
+    width: 24px;
+    height: 24px;
+    border-radius: 24px;
+    margin-left: 5px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #dbdee5;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #34a853;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4285f4;
+}
