@@ -1,15 +1,20 @@
 // react
 import React, { useRef, useState } from "react";
 import { useForm, Controller } from 'react-hook-form';
+
 // css
 import "./Form.css";
+
 // components
 import Button from "../common/Button";
 import Input from "../common/Input";
 import DropdownSelect from "../Dropdown";
+
 // helpers
 import { uploadImage } from "@helpers/uploadImage";
 import { addStudentToAPI } from "@helpers/api";
+import { validationRules } from "@helpers/validateForm";
+
 // constants
 import { GENDER_OPTIONS, CLASS_OPTIONS } from "@constants/dropdownData";
 
@@ -18,7 +23,7 @@ export interface StudentFormProps {
     onStudentAdd: () => void;
 }
 
-interface IFormInput {
+export interface IFormInput {
     name: string;
     email: string;
     phone: string;
@@ -32,13 +37,24 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
     const {
         control,
         handleSubmit,
-        formState: { errors }
-    } = useForm<IFormInput>({ mode: 'onChange' });
+        formState: { errors}
+    } = useForm<IFormInput>({
+        defaultValues: {
+            name: '',
+            email: '',
+            phone: '',
+            gender: '',
+            password: '',
+            classes: '',
+            age: 17,
+        },
+        mode: 'onChange'
+    });
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
     const onSubmit = async (data: IFormInput) => {
         let uploadedImageUrl = null;
@@ -53,6 +69,11 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                 setIsSubmitting(false);
                 return;
             }
+        }
+
+        if (Object.keys(errors).length > 0) {
+            setErrorMessage("Please fill out all required fields.");
+            return;
         }
 
         const newStudentData = {
@@ -108,9 +129,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                         <Controller
                             name="name"
                             control={control}
-                            rules={{
-                                required: "Name is required",
-                            }}
+                            rules={validationRules.name}
                             render={({ field }) => (
                                 <Input
                                     {...field}
@@ -128,8 +147,8 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                             options={CLASS_OPTIONS}
                             control={control}
                             requiredMessage="Please choose class"
-                            error={errors.classes ? errors.classes.message : null}
                         />
+                        {errors.classes && <span className="error-message">{errors.classes.message}</span>}
                     </div>
                     <div className="student-gender item">
                         <DropdownSelect
@@ -138,8 +157,8 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                             options={GENDER_OPTIONS}
                             control={control}
                             requiredMessage="Please choose gender"
-                            error={errors.gender ? errors.gender.message : null}
                         />
+                        {errors.gender && <span className="error-message">{errors.gender.message}</span>}
                     </div>
                 </div>
                 <div className="form-body-item">
@@ -148,13 +167,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                         <Controller
                             name="email"
                             control={control}
-                            rules={{
-                                required: "Email is required",
-                                pattern: {
-                                    value: /^[A-Za-z0-9._%+-]+@gmail\.com$/,
-                                    message: "Invalid email format. Only @gmail.com addresses are allowed.",
-                                },
-                            }}
+                            rules={validationRules.email}
                             render={({ field }) => (
                                 <Input
                                     {...field}
@@ -170,9 +183,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                         <Controller
                             name="phone"
                             control={control}
-                            rules={{
-                                required: "Phone is required",
-                            }}
+                            rules={validationRules.phone}
                             render={({ field }) => (
                                 <Input
                                     {...field}
@@ -190,21 +201,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                         <Controller
                             name="password"
                             control={control}
-                            rules={{
-                                required: "Password is required",
-                                validate: {
-                                    validPassword: (value) => {
-                                        const hasValidLength = value.length >= 8;
-                                        const hasLetter = /[a-zA-Z]/.test(value);
-
-                                        if (!hasValidLength || !hasLetter) {
-                                            return "Ex: 23082001a";
-                                        }
-
-                                        return true;
-                                    },
-                                },
-                            }}
+                            rules={validationRules.password}
                             render={({ field }) => (
                                 <Input
                                     {...field}
@@ -215,27 +212,12 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                             )}
                         />
                     </div>
-
                     <div className="student-age item">
                         <p className="item-title">Age</p>
                         <Controller
                             name="age"
                             control={control}
-                            rules={{
-                                required: "Age is required",
-                                validate: {
-                                    validAge: (value) => {
-                                        const age = parseInt(String(value), 10);
-                                        if (isNaN(age)) {
-                                            return "Age must be a number";
-                                        }
-                                        if (age < 15 || age > 20) {
-                                            return "Age must be between 15 and 20";
-                                        }
-                                        return true;
-                                    },
-                                },
-                            }}
+                            rules={validationRules.age}
                             render={({ field }) => (
                                 <Input
                                     {...field}
@@ -260,12 +242,12 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                     onClick={() => fileInputRef.current?.click()}
                 />
                 {imagePreviewUrl && <img src={imagePreviewUrl} alt="Preview" className="image-preview" />}
-                {errorMessage && <div className="error-message">{errorMessage}</div>}
+                {errorMessage && <span className="error-message">{errorMessage}</span>}
                 <Button
                     className="btn-primary"
                     title="Add Student"
                     buttonType="submit"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || Object.keys(errors).length > 0}
                 />
             </div>
         </form>

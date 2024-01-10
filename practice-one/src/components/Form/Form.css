@@ -37,7 +37,7 @@
 .add-student-form .form-body {
     display: flex;
     flex-direction: column;
-    gap: 33px;
+    gap: 25px;
 }
 
 .add-student-form .form-body-item {
@@ -74,9 +74,10 @@
 .error-message {
     display: block; 
     color: red; 
-    margin-top: 5px;
+    margin-top: 2px;
     font-size: var(--font-size-text-base);
-}
+    margin-bottom: 0;
+  }
 
 .add-student-form .upload-img {
     position: absolute;
