@@ -22,14 +22,14 @@ const SideBar: React.FC = (): React.ReactElement => {
     navigate(url);
   };
 
-  const renderList = SIDEBAR_ITEM.map((item, index) => {
-    const { label, icon, url } = item;
+  const renderList = SIDEBAR_ITEM.map((item) => {
+    const {id, label, icon, url } = item;
 
     const isActive = location.pathname === url;
 
     return (
       <SidebarItem
-        key={index}
+        key={id}
         label={label}
         icon={icon}
         url={url || ''}
