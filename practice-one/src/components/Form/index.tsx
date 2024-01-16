@@ -8,7 +8,7 @@ import "./Form.css";
 // components
 import Button from "../common/Button";
 import Input from "../common/Input";
-import DropdownSelect from "@components/DropDown";
+import DropdownSelect from "../DropDown";
 
 // helpers
 import { uploadImage } from "@helpers/uploadImage";
@@ -57,6 +57,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [isFormValid, setIsFormValid] = useState(false);
+    const [isImageSelected, setIsImageSelected] = useState(false);
 
     useEffect(() => {
         setIsFormValid(isValid);
@@ -111,7 +112,10 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
             const validFormats = ['image/jpeg', 'image/png', 'image/svg+xml'];
             if (!validFormats.includes(file.type)) {
                 alert("Invalid file format. Only SVG, PNG, and JPG are allowed.");
+                setIsImageSelected(true);
                 return;
+            } else {
+                setIsImageSelected(true);
             }
 
             setImageFile(file);
@@ -254,7 +258,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                     className="btn-primary"
                     title={isSubmitting ? "Adding..." : "Add Student"}
                     buttonType="submit"
-                    disabled={!isFormValid || isSubmitting}
+                    disabled={!isFormValid || isSubmitting || !isImageSelected}
                 />
             </div>
         </form>
