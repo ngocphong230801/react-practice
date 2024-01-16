@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import Input from "./index";
+import Input from ".";
 import { Variant } from "../../../types/variant";
 
 export default {
@@ -22,7 +22,6 @@ export const Primary: Story = {
       placeholder: "",
     },
 };
-
 
 export const Secondary: Story = {
     args: {

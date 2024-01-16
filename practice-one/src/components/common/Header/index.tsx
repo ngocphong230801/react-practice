@@ -1,6 +1,6 @@
 import "./Header.css";
 import React, { ReactNode} from "react";
-import { THeader } from "../../../types/header";
+import { THeader } from "../../../types";
 
 type CustomHeaderProps = {
     className?: THeader;

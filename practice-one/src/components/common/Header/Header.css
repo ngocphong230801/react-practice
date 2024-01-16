@@ -12,37 +12,28 @@
 
 .header .icon-notify {
     position: absolute;
-    right: 220px;
+    right: 295px;
     top: 40px;
     cursor: pointer;
 }
 
 .header .btn {
     position: absolute;
-    right: 162px;
+    right: 127px;
     top: 34px;
-    bottom: 21px;
-    padding: 10px;
-    width: 120px;
-    height: 40px;
-    border-radius: 8px;
 }
 
 .header .title {
     font-size: var(--font-size-text-md);
     font-weight: var(--font-weight-light);
-    position: absolute;
-    padding: 0;
-    top: 30px;
-    left: 360px;
+    margin-top: 44px;
+    margin-left: 147.5px;
 }
 
 .header .content {
     font-size: var(--font-size-text-md);
     font-weight: var(--font-weight-base);
-    position: absolute;
-    top: 50px;
-    left: 360px;
+    margin-left: 147.5px;
 }
 
 .header .log-out {

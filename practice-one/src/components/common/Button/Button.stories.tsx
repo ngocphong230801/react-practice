@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Button from "./index";
-import { Variant } from "../../../types/variant";
-import SupportIcon from "../../Icon/IconSupport";
-import CheckDownIcon from "../../Icon/IconCheckDown";
+import Button from ".";
+import { Variant } from "src/types";
+import SupportIcon from "@components/Icon/IconSupport";
+import CheckDownIcon from "@components/Icon/IconCheckDown";
 
 export default {
     title: "Components/Button",

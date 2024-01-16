@@ -1,54 +1,32 @@
-import { Billing, Student, Dashboard, Setting, Exams, Feature } from "../assets/icon";
+import { billing, dashboard, exams, setting, student } from "../assets/icon";
 
-const SIZE_BAR_LINKS = [
+const SIDEBAR_ITEM = [
     {
-        id: 1,
-        icon: Dashboard,
-        path: "/",
-        content: "Udemy Inter. school "
+        label: 'Dashboard',
+        icon: dashboard,
+        url: '/'
     },
     {
-        id: 2,
-        icon: Dashboard,
-        path: "/",
-        content: "Dashboard"
+        label: 'Teacher',
+        icon: dashboard,
     },
     {
-        id: 3,
-        icon: Dashboard,
-        path: "/teacher",
-        content: "Teacher"
+        label: 'Student/ Classes',
+        icon: student,
+        url: '/student'
     },
     {
-        id: 4,
-        icon: Student,
-        path: "/student",
-        content: "Student/classes"
+        label: 'Billing',
+        icon: billing,
     },
     {
-        id: 5,
-        icon: Billing,
-        path: "/billing",
-        content: "Billing"
+        label: 'Setting and profile',
+        icon: setting,
     },
     {
-        id: 6,
-        icon: Setting,
-        path: "/setting",
-        content: "Setting and profile"
+        label: 'Exams',
+        icon: exams,
     },
-    {
-        id: 7,
-        icon: Exams,
-        path: "/exams",
-        content: "Exams"
-    },
-    {
-        id: 8,
-        icon: Feature,
-        path: "/feature",
-        content: "Feature"
-    }
-];
+]
 
-export default SIZE_BAR_LINKS;
+export default SIDEBAR_ITEM

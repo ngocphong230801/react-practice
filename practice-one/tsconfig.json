@@ -23,7 +23,10 @@
     "baseUrl": ".",
     "paths": {
       "@helpers/*": ["src/helpers/*"],
-      "@constants/*": ["src/constants/*"]
+      "@constants/*": ["src/constants/*"],
+      "@assets/*": ["src/assets/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@components/*": ["src/components/*"],
     }
 
   },
