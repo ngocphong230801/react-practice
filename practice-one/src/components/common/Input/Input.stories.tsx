@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import Input from ".";
-import { Variant } from "../../../types/variant";
+import { Variant } from "@type/variant";
 
 export default {
   title: "Components/Input",

@@ -1,8 +1,15 @@
+// header.tsx
 import Header from ".";
+
+// react story book
 import { Meta, StoryObj } from "@storybook/react";
+
+// components
 import Button from "../Button";
-import { Notify } from "../../Icon";
-import { THeader } from "../../../types";
+import { Notify } from "@components/Icon";
+
+// type
+import { THeader } from "@type/header";
 
 export default {
     title: "Components/Header",

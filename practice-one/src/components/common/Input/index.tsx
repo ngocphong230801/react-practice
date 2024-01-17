@@ -1,6 +1,11 @@
+// react
 import { ChangeEventHandler, forwardRef } from "react";
+
+// css
 import "./Input.css";
-import { Variant } from "../../../types/variant";
+
+// type
+import { Variant } from "@type/variant";
 
 type CustomInputProps = {
   placeholder?: string;
