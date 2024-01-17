@@ -12,12 +12,14 @@ import DropdownSelect from "../DropDown";
 
 // helpers
 import { uploadImage } from "@helpers/uploadImage";
-import { addStudentToAPI } from "src/service/api";
 import { validationRules } from "@helpers/validateForm";
 
 // constants
 import { GENDER_OPTIONS, CLASS_OPTIONS } from "@constants/dropdownData";
 import { close } from "@assets/icon";
+
+// service
+import { addStudentToAPI } from "@service/api";
 
 export interface StudentFormProps {
     closeForm: () => void;
