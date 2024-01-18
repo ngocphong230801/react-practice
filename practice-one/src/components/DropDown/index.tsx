@@ -22,12 +22,12 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
     control,
     requiredMessage,
     isRequired = true,
-    error, 
+    error,
 }) => {
     const [isDefaultSelected, setIsDefaultSelected] = useState(true);
 
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setIsDefaultSelected(event.target.value === ''); 
+        setIsDefaultSelected(event.target.value === '');
     };
 
     return (
@@ -38,12 +38,12 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
                 control={control}
                 rules={isRequired ? { required: requiredMessage } : {}}
                 render={({ field }) => (
-                    <select {...field} 
-                            className={`select-item ${isDefaultSelected || field.value === '' ? 'default-selected' : 'option-selected'}`}
-                            onChange={(e) => {
-                                field.onChange(e);
-                                handleChange(e);
-                            }}>
+                    <select {...field}
+                        className={`select-item ${isDefaultSelected || field.value === '' ? 'default-selected' : 'option-selected'}`}
+                        onChange={(e) => {
+                            field.onChange(e);
+                            handleChange(e);
+                        }}>
                         <option value="">{label}</option>
                         {options.map(option => (
                             <option key={option.value} value={option.value} className='option'>
