@@ -27,7 +27,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
     const [isDefaultSelected, setIsDefaultSelected] = useState(true);
 
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setIsDefaultSelected(event.target.value === '');
+        setIsDefaultSelected(event.target.value === ''); 
     };
 
     return (
@@ -39,7 +39,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
                 rules={isRequired ? { required: requiredMessage } : {}}
                 render={({ field }) => (
                     <select {...field} 
-                            className={`select-item ${isDefaultSelected ? 'default-selected' : 'option-selected'}`}
+                            className={`select-item ${isDefaultSelected || field.value === '' ? 'default-selected' : 'option-selected'}`}
                             onChange={(e) => {
                                 field.onChange(e);
                                 handleChange(e);

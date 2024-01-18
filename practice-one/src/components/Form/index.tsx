@@ -41,7 +41,6 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
         control,
         handleSubmit,
         reset,
-        setValue,
         formState: { errors, isValid, dirtyFields }
     } = useForm<IFormInput>({
         defaultValues: {
@@ -151,8 +150,6 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
         setImagePreviewUrl('');
         setErrorMessage('');
         setImageError('');
-        setValue('gender', '');
-        setValue('classes', '');
     };
 
     return (
