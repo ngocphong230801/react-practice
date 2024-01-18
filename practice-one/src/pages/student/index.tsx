@@ -79,17 +79,6 @@ const StudentPage: React.FC = (): React.ReactElement => {
         setSelectedStudent(student);
     };
 
-    if (loading) {
-        return (
-            <div>
-                <div className="loader-container">
-                    <div className="loader"></div>
-                    <p>Loading...</p>
-                </div>
-            </div>
-        )
-    }
-
     return (
         <div className="container">
             <div className="student-page">
@@ -98,77 +87,86 @@ const StudentPage: React.FC = (): React.ReactElement => {
                     <span className="log-out">Logout</span>
                     <img src={mention} alt="mention" className="icon-mention" />
                 </div>
-                {students.length === 0 ? (
-                    <>
-                        <div className="student-controls-empty">
-                            <p className="student-section-title">Students</p>
-                            <div className="student-action-container">
-                                <a href="#" className="export-csv-empty">Export CSV</a>
-                                <div className="button-container-empty">
-                                    <Button
-                                        title="Add student"
-                                        className="btn-default btn-add-student-empty"
-                                        onClick={handleAddStudentClick}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="search-box-empty">
-                            <select className="filter">
-                                <option value="default">Add filter</option>
-                            </select>
-                            <img src={search} alt="icon-search" className="icon-search" />
-                            <StudentSearch students={students} onSearchResult={handleSearchResult} />
-                        </div>
-                    </>
-                ) : (
-                    <>
-
-                        <a href="#" className="export-csv">Export CSV</a>
-                        <div className="button-container">
-                            <Button
-                                title="Add student"
-                                className="btn-default btn-add-student"
-                                onClick={handleAddStudentClick}
-                            />
-                        </div>
-                        <div className="search-box">
-                            <select className="filter">
-                                <option value="default">Add filter</option>
-                            </select>
-                            <img src={search} alt="icon-search" className="icon-search" />
-                            <StudentSearch students={students} onSearchResult={handleSearchResult} />
-                        </div>
-                    </>
-                )}
-
-                {showStudentForm && <div className="overlay" onClick={handleCloseForm}></div>}
-                {showStudentForm && (
-                    <StudentForm closeForm={handleCloseForm} onStudentAdd={handleStudentAdded} />
-                )}
-
-                {students.length === 0 ? (
-                    <div className="no-student">
-                        <img src={EmptyPage} alt="empty-page-image" />
-                        <h2 className="empty-message">No students at this time</h2>
-                        <p className="enrollment-message">Students will appear here after they enroll in your school.</p>
-                        <Button
-                            className="btn-secondary"
-                            title="Support"
-                            iconLeft={<Support />}
-                            iconRight={<CheckDown />}
-                        />
+    
+                {loading ? (
+                    <div className="loader-container">
+                        <div className="loader"></div>
+                        <p>Loading...</p>
                     </div>
                 ) : (
                     <>
-                        <ListStudent students={filteredStudents} onStudentClick={handleStudentSelect} />
-                        {selectedStudent && <InformationStudent student={selectedStudent} students={students} />}
+                        {students.length === 0 ? (
+                            <>
+                                <div className="student-controls-empty">
+                                    <p className="student-section-title">Students</p>
+                                    <div className="student-action-container">
+                                        <a href="#" className="export-csv-empty">Export CSV</a>
+                                        <div className="button-container-empty">
+                                            <Button
+                                                title="Add student"
+                                                className="btn-default btn-add-student-empty"
+                                                onClick={handleAddStudentClick}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div className="search-box-empty">
+                                    <select className="filter">
+                                        <option value="default">Add filter</option>
+                                    </select>
+                                    <img src={search} alt="icon-search" className="icon-search" />
+                                    <StudentSearch students={students} onSearchResult={handleSearchResult} />
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <a href="#" className="export-csv">Export CSV</a>
+                                <div className="button-container">
+                                    <Button
+                                        title="Add student"
+                                        className="btn-default btn-add-student"
+                                        onClick={handleAddStudentClick}
+                                    />
+                                </div>
+                                <div className="search-box">
+                                    <select className="filter">
+                                        <option value="default">Add filter</option>
+                                    </select>
+                                    <img src={search} alt="icon-search" className="icon-search" />
+                                    <StudentSearch students={students} onSearchResult={handleSearchResult} />
+                                </div>
+                            </>
+                        )}
+    
+                        {showStudentForm && <div className="overlay" onClick={handleCloseForm}></div>}
+                        {showStudentForm && (
+                            <StudentForm closeForm={handleCloseForm} onStudentAdd={handleStudentAdded} />
+                        )}
+    
+                        {students.length === 0 ? (
+                            <div className="no-student">
+                                <img src={EmptyPage} alt="empty-page-image" />
+                                <h2 className="empty-message">No students at this time</h2>
+                                <p className="enrollment-message">Students will appear here after they enroll in your school.</p>
+                                <Button
+                                    className="btn-secondary"
+                                    title="Support"
+                                    iconLeft={<Support />}
+                                    iconRight={<CheckDown />}
+                                />
+                            </div>
+                        ) : (
+                            <>
+                                <ListStudent students={filteredStudents} onStudentClick={handleStudentSelect} />
+                                {selectedStudent && <InformationStudent student={selectedStudent} students={students} />}
+                            </>
+                        )}
                     </>
                 )}
             </div>
         </div>
-    );
+    );    
 }
 
 export default StudentPage;

@@ -194,3 +194,8 @@
         transform: rotate(360deg);
     }
 }
+
+
+.student-page .sidebar {
+    z-index: 1200;
+}

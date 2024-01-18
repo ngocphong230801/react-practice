@@ -11,3 +11,11 @@
     background-size: 12px;
     padding: 5px 8px 5px 8px;
 }
+
+.default-selected {
+    color: var(--color-text-septenary);
+}
+
+.option-selected {
+    color: var(--color-text-senary);
+}

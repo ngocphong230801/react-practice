@@ -1,5 +1,6 @@
 // react-hook-form
 import { Controller, Control } from 'react-hook-form';
+import { useState } from 'react';
 
 // css
 import "./Dropdown.css"
@@ -7,8 +8,8 @@ import "./Dropdown.css"
 interface DropdownSelectProps {
     name: string;
     label: string;
-    options: { value: string; label: string }[];
-    control: Control<any>; // Import Control from react-hook-form
+    options: { value: string; label: string; color?: string }[];
+    control: Control<any>;
     requiredMessage?: string;
     isRequired?: boolean;
     error?: string | null;
@@ -23,6 +24,12 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
     isRequired = true,
     error, 
 }) => {
+    const [isDefaultSelected, setIsDefaultSelected] = useState(true);
+
+    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setIsDefaultSelected(event.target.value === '');
+    };
+
     return (
         <div className={`${name}-select item`}>
             <p className="item-title">{label}</p>
@@ -31,10 +38,15 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
                 control={control}
                 rules={isRequired ? { required: requiredMessage } : {}}
                 render={({ field }) => (
-                    <select {...field} className="select-item">
+                    <select {...field} 
+                            className={`select-item ${isDefaultSelected ? 'default-selected' : 'option-selected'}`}
+                            onChange={(e) => {
+                                field.onChange(e);
+                                handleChange(e);
+                            }}>
                         <option value="">{label}</option>
                         {options.map(option => (
-                            <option key={option.value} value={option.value}>
+                            <option key={option.value} value={option.value} className='option'>
                                 {option.label}
                             </option>
                         ))}

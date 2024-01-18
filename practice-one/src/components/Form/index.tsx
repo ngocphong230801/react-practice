@@ -40,7 +40,9 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
     const {
         control,
         handleSubmit,
-        formState: {errors, isValid}
+        reset,
+        setValue,
+        formState: { errors, isValid, dirtyFields }
     } = useForm<IFormInput>({
         defaultValues: {
             name: '',
@@ -60,6 +62,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [isFormValid, setIsFormValid] = useState(false);
     const [isImageSelected, setIsImageSelected] = useState(false);
+    const [imageError, setImageError] = useState<string>('');
 
     useEffect(() => {
         setIsFormValid(isValid);
@@ -111,18 +114,45 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files && event.target.files[0];
         if (file) {
-            const validFormats = ['image/jpeg', 'image/png', 'image/svg+xml'];
+            const validFormats = ['image/jpeg', 'image/png'];
+            const maxFileSize = 5 * 1024 * 1024;
+
             if (!validFormats.includes(file.type)) {
-                alert("Invalid file format. Only SVG, PNG, and JPG are allowed.");
-                setIsImageSelected(true);
-                return;
+                setImageError("Invalid file format. Only PNG and JPG are allowed.");
+                setIsImageSelected(false);
+            } else if (file.size > maxFileSize) {
+
+                setImageError(`File is too large. Maximum size allowed is ${maxFileSize / 1024 / 1024}MB.`);
+                setIsImageSelected(false);
             } else {
+                setImageError('');
+                setImageFile(file);
+                setImagePreviewUrl(URL.createObjectURL(file));
                 setIsImageSelected(true);
             }
-
-            setImageFile(file);
-            setImagePreviewUrl(URL.createObjectURL(file));
+        } else {
+            setIsImageSelected(false);
         }
+    };
+
+    const isAnyFieldDirty = Object.keys(dirtyFields).length > 0;
+
+    const handleReset = () => {
+        reset({
+            name: '',
+            email: '',
+            phone: '',
+            gender: '',
+            password: '',
+            classes: '',
+            age: 17,
+        });
+        setImageFile(null);
+        setImagePreviewUrl('');
+        setErrorMessage('');
+        setImageError('');
+        setValue('gender', '');
+        setValue('classes', '');
     };
 
     return (
@@ -148,6 +178,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                                     {...field}
                                     className="default"
                                     type="text"
+                                    placeholder="Please enter name student"
                                     error={errors.name ? errors.name.message : null}
                                 />
                             )}
@@ -186,6 +217,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                                     {...field}
                                     className="primary"
                                     type="email"
+                                    placeholder="Please enter email student"
                                     error={errors.email ? errors.email.message : null}
                                 />
                             )}
@@ -202,6 +234,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                                     {...field}
                                     className="primary"
                                     type="text"
+                                    placeholder="Please enter phone number student"
                                     error={errors.phone ? errors.phone.message : null}
                                 />
                             )}
@@ -220,6 +253,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                                     {...field}
                                     className="primary"
                                     type="password"
+                                    placeholder="Please enter password student"
                                     error={errors.password ? errors.password.message : null}
                                 />
                             )}
@@ -236,6 +270,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                                     {...field}
                                     className="primary"
                                     type="text"
+                                    placeholder="Please enter age student"
                                     error={errors.age ? errors.age.message : null}
                                 />
                             )}
@@ -256,12 +291,23 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                 />
                 {imagePreviewUrl && <img src={imagePreviewUrl} alt="Preview" className="image-preview" />}
                 {errorMessage && <span className="error-message">{errorMessage}</span>}
-                <Button
-                    className="btn-primary"
-                    title={isSubmitting ? "Adding..." : "Add Student"}
-                    buttonType="submit"
-                    disabled={!isFormValid || isSubmitting || !isImageSelected}
-                />
+                {imageError && <span className="error-message image-error">{imageError}</span>}
+
+                <div className="btn-action">
+                    <Button
+                        className="btn-primary reset-form"
+                        title="Reset Form"
+                        onClick={handleReset}
+                        disabled={!isAnyFieldDirty}
+                    />
+                    <Button
+                        className="btn-default add-student"
+                        title={isSubmitting ? "Adding..." : "Add Student"}
+                        buttonType="submit"
+                        disabled={!isFormValid || isSubmitting || !isImageSelected}
+                    />
+                </div>
+
             </div>
         </form>
     );
