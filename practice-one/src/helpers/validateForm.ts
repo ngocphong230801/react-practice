@@ -45,7 +45,7 @@ export const validationRules = {
         required: "Age is blank",
         pattern: {
             value: /^(1[0-9]|[2-9][0-9]|100)$/,
-            message: "Age must be a number between 10 and 100",
+            message: "Age must be a number and between 10 and 100",
         },
     },
 };
