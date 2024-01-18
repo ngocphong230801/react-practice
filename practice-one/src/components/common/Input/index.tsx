@@ -16,10 +16,11 @@ type CustomInputProps = {
   variant?: Variant;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   error?: string | null;
+  disabled?: boolean;
 };
 
 const Input = forwardRef<HTMLInputElement, CustomInputProps>(
-  ({ placeholder, className, value, name, type, variant = Variant, onChange, error }, ref) => {
+  ({ placeholder, className, value, name, type, variant = Variant, onChange, error, disabled }, ref) => {
     const inputClassName = `${className} input ${variant} ${error ? "error" : ""}`;
 
     return (
@@ -32,6 +33,7 @@ const Input = forwardRef<HTMLInputElement, CustomInputProps>(
           name={name}
           onChange={onChange}
           ref={ref}
+          disabled={disabled}
         />
         {error && <span className="error-message">{error}</span>}
       </div>

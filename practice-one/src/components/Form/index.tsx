@@ -173,6 +173,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                             render={({ field }) => (
                                 <Input
                                     {...field}
+                                    disabled={isSubmitting}
                                     className="default"
                                     type="text"
                                     placeholder="Please enter name student"
@@ -185,6 +186,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                         <DropdownSelect
                             name="classes"
                             label="Class"
+                            disabled= {isSubmitting}
                             options={CLASS_OPTIONS}
                             control={control}
                             requiredMessage="Please choose class"
@@ -195,6 +197,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                         <DropdownSelect
                             name="gender"
                             label="Gender"
+                            disabled= {isSubmitting}
                             options={GENDER_OPTIONS}
                             control={control}
                             requiredMessage="Please choose gender"
@@ -214,6 +217,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                                     {...field}
                                     className="primary"
                                     type="email"
+                                    disabled={isSubmitting}
                                     placeholder="Please enter email student"
                                     error={errors.email ? errors.email.message : null}
                                 />
@@ -230,6 +234,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                                 <Input
                                     {...field}
                                     className="primary"
+                                    disabled={isSubmitting}
                                     type="text"
                                     placeholder="Please enter phone number student"
                                     error={errors.phone ? errors.phone.message : null}
@@ -249,6 +254,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                                 <Input
                                     {...field}
                                     className="primary"
+                                    disabled={isSubmitting}
                                     type="password"
                                     placeholder="Please enter password student"
                                     error={errors.password ? errors.password.message : null}
@@ -266,6 +272,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                                 <Input
                                     {...field}
                                     className="primary"
+                                    disabled={isSubmitting}
                                     type="text"
                                     placeholder="Please enter age student"
                                     error={errors.age ? errors.age.message : null}

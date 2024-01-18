@@ -13,6 +13,7 @@ interface DropdownSelectProps {
     requiredMessage?: string;
     isRequired?: boolean;
     error?: string | null;
+    disabled: boolean;
 }
 
 const DropdownSelect: React.FC<DropdownSelectProps> = ({
@@ -23,6 +24,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
     requiredMessage,
     isRequired = true,
     error,
+    disabled,
 }) => {
     const [isDefaultSelected, setIsDefaultSelected] = useState(true);
 
@@ -36,6 +38,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
             <Controller
                 name={name}
                 control={control}
+                disabled = {disabled}
                 rules={isRequired ? { required: requiredMessage } : {}}
                 render={({ field }) => (
                     <select {...field}
