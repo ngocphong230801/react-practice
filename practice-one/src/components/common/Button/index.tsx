@@ -1,6 +1,9 @@
-import "./Button.css"
+// react
 import React, { MouseEventHandler, ReactNode } from "react";
-import { Variant } from "../../../types/variant";
+// css
+import "./Button.css"
+// type
+import { Variant } from "@type/variant";
 
 type CustomBtnProps = {
     className?: string;

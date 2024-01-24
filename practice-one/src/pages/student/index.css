@@ -1,0 +1,203 @@
+.student-page {
+    position: relative;
+    display: flex;
+}
+
+.student-page .log-out {
+    color: var(--color-text-primary);
+    font-size: var(--font-size-text-base);
+    font-weight: var(--font-weight-semibold);
+    position: absolute;
+    top: 30.5px;
+    right: 104px;
+}
+
+.student-page .icon-mention {
+    position: absolute;
+    top: 31px;
+    right: 192px;
+}
+
+.student-page .btn-add-student {
+    position: absolute;
+    left: 400px;
+    top: 39px;
+    z-index: 1000;
+}
+
+.student-page .export-csv {
+    color: var(--color-text-tertiary);
+    font-size: var(--font-size-text-base);
+    font-weight: var(--font-weight-semibold);
+    position: absolute;
+    top: 50px;
+    left: 300px;
+    z-index: 1000;
+}
+
+.student-page .search-box {
+    position: absolute;
+    width: 778px;
+    top: 105px;
+    left: 23px;
+    display: flex;
+    align-items: center;
+    display: flex;
+    padding: 16px 20px 16px 16px;
+    align-items: center;
+    flex: 1 0 0
+}
+
+.student-page .icon-search {
+    display: block;
+    background-color: var(--background-secondary);
+    padding: 12.5px 9px;
+    padding-right: 0;
+}
+
+.student-page .filter {
+    margin-left: 262px;
+    width: 120px;
+    align-items: center;
+    color: var(--color-text-septenary);
+    margin-right: 30px;
+    border: none;
+}
+
+.student-page .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1500;
+    background-color: rgba(61, 61, 61, 0.19);
+}
+
+.student-page .btn-secondary {
+    position: absolute;
+    bottom: 19px;
+    right: 0;
+}
+
+.student-page .student-action-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.student-page .student-section-title {
+    color: var(--color-text-quaternary);
+    font-size: var(--font-size-text-md);
+    font-weight: var(--font-weight-light);
+}
+
+.student-page .student-controls-empty {
+    display: flex;
+    justify-content: space-between;
+}
+
+.student-page .search-box-empty {
+    position: absolute;
+    width: 778px;
+    top: 146px;
+    left: 126px;
+    display: flex;
+    align-items: center;
+    display: flex;
+    padding: 16px 20px 16px 16px;
+    align-items: center;
+    flex: 1 0 0;
+}
+
+.student-page .btn-secondary {
+    position: absolute;
+    right: 120px;
+    top: 565px;
+}
+
+.export-csv-empty {
+    position: absolute;
+    color: var(--color-text-tertiary);
+    font-size: var(--font-size-text-base);
+    font-weight: var(--font-weight-semibold);
+    top: 90px;
+    right: 263px;
+}
+
+.student-controls-empty .btn-default {
+    position: absolute;
+    top: 78px;
+    right: 120px;
+}
+
+.student-page .no-student {
+    width: 952px;
+    height: 419px;
+    background-color: var(--background-secondary);
+    margin-top: 225px;
+    margin-left: 52px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.student-page .empty-message {
+    color: var(--color-text-quaternary);
+    font-size: var(--font-size-text-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-top: 31px;
+}
+
+.student-page .enrollment-message {
+    color: var(--color-text-quaternary);
+    font-size: var(--font-size-text-2xl);
+    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-light);
+    margin-top: 5px;
+    font-size: var(--font-size-text-base);
+}
+
+.student-page .student-section-title {
+    margin-top: 88.5px;
+    margin-left: 38px;
+}
+
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+}
+
+.loader {
+    border: 5px solid var(--background-quaternary);
+    border-top: 5px solid var(--background-primary);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.student-page .sidebar {
+    z-index: 1200;
+}

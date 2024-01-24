@@ -13,9 +13,19 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.49.3",
+    "react-router-dom": "^6.21.2"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^7.6.5",
+    "@storybook/addon-interactions": "^7.6.5",
+    "@storybook/addon-links": "^7.6.5",
+    "@storybook/addon-onboarding": "^1.0.10",
+    "@storybook/blocks": "^7.6.5",
+    "@storybook/react": "^7.6.5",
+    "@storybook/react-vite": "^7.6.5",
+    "@storybook/test": "^7.6.5",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
@@ -24,16 +34,8 @@
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.8",
     "storybook": "^7.6.5",
-    "@storybook/react": "^7.6.5",
-    "@storybook/react-vite": "^7.6.5",
-    "@storybook/addon-links": "^7.6.5",
-    "@storybook/addon-essentials": "^7.6.5",
-    "@storybook/blocks": "^7.6.5",
-    "@storybook/addon-onboarding": "^1.0.10",
-    "@storybook/addon-interactions": "^7.6.5",
-    "@storybook/test": "^7.6.5"
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8"
   }
 }

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import Input from "./index";
-import { Variant } from "../../../types/variant";
+import Input from ".";
+import { Variant } from "@type/variant";
 
 export default {
   title: "Components/Input",
@@ -22,7 +22,6 @@ export const Primary: Story = {
       placeholder: "",
     },
 };
-
 
 export const Secondary: Story = {
     args: {
