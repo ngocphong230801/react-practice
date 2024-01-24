@@ -66,12 +66,13 @@
     font-size: var(--font-size-text-base);
 }
 
-.studen-form .btn-primary {
+.studen-form .btn-action {
+    display: flex;
+    gap: 50px;
     position: absolute;
-    left: 81px;
-    bottom: 89px;
+    bottom: 30px;
+    left: 280px;
 }
-
 
 .error-message {
     display: block;
@@ -83,20 +84,27 @@
 
 .studen-form .upload-img {
     position: absolute;
-    bottom: 89px;
-    left: 500px
+    bottom: 140px;
+    left: 370px
 }
 
 .studen-form .image-preview {
     width: 100px;
     height: 100px;
     position: absolute;
-    right: 220px;
-    bottom: 89px;
+    right: 330px;
+    bottom: 80px;
 }
 
 .studen-form .error-img {
     position: absolute;
     bottom: 70px;
     left: 500px;
+}
+
+
+.studen-form .image-error {
+    position: absolute;
+    bottom: 120px;
+    left: 300px;
 }

@@ -20,7 +20,7 @@ export const validationRules = {
                 const hasLetter = /[a-zA-Z]/.test(value);
 
                 if (!hasValidLength || !hasLetter) {
-                    return "Password >= 8 characters & include a letter.";
+                    return "Password at least eight characters and include a letter ";
                 }
 
                 return true;
@@ -43,13 +43,9 @@ export const validationRules = {
     },
     age: {
         required: "Age is blank",
-        validate: {
-            validAge: (value: number) => {
-                const age = parseInt(String(value), 10);
-                if (isNaN(age)) {
-                    return "Age must be a number";
-                }
-            },
+        pattern: {
+            value: /^(1[0-9]|[2-9][0-9]|100)$/,
+            message: "Age must be a number and between 10 and 100",
         },
     },
 };

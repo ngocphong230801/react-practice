@@ -48,10 +48,10 @@ const SideBar: React.FC = (): React.ReactElement => {
         <h1 className="sidebar-heading">Udemy Inter. School</h1>
       </div>
       <ul className="sidebar-menu">{renderList}</ul>
-      <a href="#" className="sidebar-feature" onClick={() => handleNavigation('your-feature-url')}>
+      <a href="#" className="sidebar-feature">
         <img src={feature} alt="Feature" />
         <span className="sidebar-item-content">Feature</span>
-        <button className="new-item">New</button>
+        <p className="new-item">New</p>
       </a>
     </div>
   );

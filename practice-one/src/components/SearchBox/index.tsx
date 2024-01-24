@@ -1,5 +1,10 @@
+// react
 import React, { useState, useEffect } from 'react';
-import Input from "../../components/common/Input";
+
+// components
+import Input from '@components/common/Input';
+
+// types
 import { StudentProfile } from 'src/types';
 
 interface StudentSearchProps {

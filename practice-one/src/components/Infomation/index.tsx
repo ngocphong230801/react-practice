@@ -16,7 +16,7 @@ export interface InformationStudentProps {
 }
 
 const InformationStudent: React.FC<InformationStudentProps> = React.memo(({ student, students }) => {
-    const classmates = useMemo(() => students.filter(s => s.studentID !== student.studentID), [students, student.studentID]);
+    const classmates = useMemo(() => students.filter(s => s.classes === student.classes && s.studentID !== student.studentID), [students, student.classes, student.studentID]);
     const displayCount = 5;
 
     return (
