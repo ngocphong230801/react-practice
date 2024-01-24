@@ -51,7 +51,7 @@ const SideBar: React.FC = (): React.ReactElement => {
       <a href="#" className="sidebar-feature">
         <img src={feature} alt="Feature" />
         <span className="sidebar-item-content">Feature</span>
-        <button className="new-item">New</button>
+        <p className="new-item">New</p>
       </a>
     </div>
   );

@@ -56,7 +56,7 @@ const StudentPage: React.FC = (): React.ReactElement => {
                 setSelectedStudent(null);
             }
         } catch (error) {
-            console.error('Error:', error);
+            alert("Error")
         } finally {
             setLoading(false);
         }

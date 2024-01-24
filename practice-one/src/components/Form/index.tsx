@@ -115,25 +115,17 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
         if (file) {
             const validFormats = ['image/jpeg', 'image/png'];
             const maxFileSize = 5 * 1024 * 1024;
-
-            if (!validFormats.includes(file.type)) {
-                setImageError("Invalid file format. Only PNG and JPG are allowed.");
-                setIsImageSelected(false);
-            } else if (file.size > maxFileSize) {
-
-                setImageError(`File is too large. Maximum size allowed is ${maxFileSize / 1024 / 1024}MB.`);
-                setIsImageSelected(false);
-            } else {
-                setImageError('');
-                setImageFile(file);
-                setImagePreviewUrl(URL.createObjectURL(file));
-                setIsImageSelected(true);
-            }
+    
+            !validFormats.includes(file.type)
+                ? (setImageError("Invalid file format. Only PNG and JPG are allowed."), setIsImageSelected(false))
+                : file.size > maxFileSize
+                    ? (setImageError(`File is too large. Maximum size allowed is ${maxFileSize / 1024 / 1024}MB.`), setIsImageSelected(false))
+                    : (setImageError(''), setImageFile(file), setImagePreviewUrl(URL.createObjectURL(file)), setIsImageSelected(true));
         } else {
             setIsImageSelected(false);
         }
     };
-
+    
     const isAnyFieldDirty = Object.keys(dirtyFields).length > 0;
 
     const handleReset = () => {
