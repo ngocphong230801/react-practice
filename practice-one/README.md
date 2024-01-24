@@ -42,7 +42,7 @@
 
 ## Information:
 
-- Time line: 15/12/2023 -> 25/12/2023
+- Time line: 6 working days.
 - Editor: Visual Studio Code
 - Supported browser: Chrome lasted
 
