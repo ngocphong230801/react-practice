@@ -1,6 +1,5 @@
-// formValidationRules.ts
 
-export const validationRules = {
+export const VALIDATION_RULES = {
     name: {
         required: "Name is blank",
         maxLength: {
