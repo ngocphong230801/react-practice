@@ -11,10 +11,10 @@ type CustomInputProps = {
   placeholder?: string;
   className?: string;
   type: string;
-  name?: string;
-  value?: string | number;
+  name: string;
+  value: string | number;
   variant?: Variant;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
+  onChange: ChangeEventHandler<HTMLInputElement>;
   error?: string | null;
   disabled?: boolean;
 };

@@ -9,7 +9,7 @@ type CustomBtnProps = {
     className?: string;
     iconLeft?: ReactNode;
     iconRight?: ReactNode;
-    title?: string;
+    title: string;
     variant?: Variant;
     disabled?: boolean;
     loading?: boolean;
