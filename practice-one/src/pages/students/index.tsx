@@ -21,6 +21,7 @@ import { mention, search } from "@assets/icon";
 
 // css
 import "./index.css";
+import { fetchStudentsAPI } from "@service/api";
 
 const StudentPage: React.FC = (): React.ReactElement => {
     const [showStudentForm, setShowStudentForm] = useState(false);
@@ -44,19 +45,18 @@ const StudentPage: React.FC = (): React.ReactElement => {
     const fetchStudents = async () => {
         try {
             setLoading(true);
-            const response = await fetch("https://657bfea7394ca9e4af152952.mockapi.io/api/students/students");
-            if (!response.ok) {
-                throw new Error('Error fetching students');
-            }
-            const studentsData = await response.json();
-            setStudents(studentsData);
-            if (studentsData.length > 0) {
-                setSelectedStudent(studentsData[0]);
-            } else {
+            const result = await fetchStudentsAPI();
+            if (typeof result === 'string') {
+                alert(result);
                 setSelectedStudent(null);
+            } else {
+                setStudents(result);
+                if (result.length > 0) {
+                    setSelectedStudent(result[0]);
+                } else {
+                    setSelectedStudent(null);
+                }
             }
-        } catch (error) {
-            alert("Error")
         } finally {
             setLoading(false);
         }
@@ -159,7 +159,7 @@ const StudentPage: React.FC = (): React.ReactElement => {
                         ) : (
                             <>
                                 <ListStudent students={filteredStudents} onStudentClick={handleStudentSelect} />
-                                {selectedStudent && <InformationStudent student={selectedStudent} students={students} />}
+                                {selectedStudent && <InformationStudent student={selectedStudent} classmates={filteredStudents} />}
                             </>
                         )}
                     </>
