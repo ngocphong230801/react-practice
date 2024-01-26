@@ -1,11 +1,14 @@
 // react
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 // components
 import Input from '@components/common/Input';
 
 // types
 import { StudentProfile } from 'src/types';
+
+import debounce from 'lodash/debounce';
+
 
 interface StudentSearchProps {
     students: StudentProfile[];
@@ -15,13 +18,21 @@ interface StudentSearchProps {
 const StudentSearch: React.FC<StudentSearchProps> = ({ students, onSearchResult }) => {
     const [searchQuery, setSearchQuery] = useState("");
 
+    const debounceSearch = useCallback(
+        debounce(query => {
+            const filteredStudents = students.filter(student =>
+                student.name.toLowerCase().includes(query.toLowerCase()) || 
+                student.email.toLowerCase().includes(query.toLowerCase())
+            );
+            onSearchResult(filteredStudents);
+        }, 300),
+        [students, onSearchResult] 
+    );
+    
     useEffect(() => {
-        const filteredStudents = students.filter(student =>
-            student.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-            student.email.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-        onSearchResult(filteredStudents);
-    }, [searchQuery, students, onSearchResult]);
+        debounceSearch(searchQuery);
+        return () => debounceSearch.cancel();
+    }, [searchQuery, debounceSearch]);
     
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
