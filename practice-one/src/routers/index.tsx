@@ -1,4 +1,4 @@
-import StudentPage from "../pages/student";
+import StudentPage from "../pages/students";
 import DashboadPage from "../pages/dashboad";
 
 export const routers = [

@@ -1,6 +1,5 @@
 // react-hook-form
 import { Controller, Control } from 'react-hook-form';
-import { useState } from 'react';
 
 // css
 import "./Dropdown.css"
@@ -26,12 +25,6 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
     error,
     disabled,
 }) => {
-    const [isDefaultSelected, setIsDefaultSelected] = useState(true);
-
-    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setIsDefaultSelected(event.target.value === '');
-    };
-
     return (
         <div className={`${name}-select item`}>
             <p className="item-title">{label}</p>
@@ -42,10 +35,9 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
                 rules={isRequired ? { required: requiredMessage } : {}}
                 render={({ field }) => (
                     <select {...field}
-                        className={`select-item ${isDefaultSelected || field.value === '' ? 'default-selected' : 'option-selected'}`}
+                        className={`select-item ${field.value === '' ? 'default-selected' : 'option-selected'}`}
                         onChange={(e) => {
                             field.onChange(e);
-                            handleChange(e);
                         }}>
                         <option value="">{label}</option>
                         {options.map(option => (

@@ -12,11 +12,17 @@ import "./Information.css"
 
 export interface InformationStudentProps {
     student: StudentProfile;
-    students: StudentProfile[];
+    classmates: StudentProfile[];
 }
 
-const InformationStudent: React.FC<InformationStudentProps> = React.memo(({ student, students }) => {
-    const classmates = useMemo(() => students.filter(s => s.classes === student.classes && s.studentID !== student.studentID), [students, student.classes, student.studentID]);
+const filterClassmates = (allClassmates: StudentProfile[], currentStudent: StudentProfile): StudentProfile[] => {
+    return allClassmates.filter(classmate => 
+        classmate.classes === currentStudent.classes && classmate.studentID !== currentStudent.studentID);
+};
+
+
+const InformationStudent: React.FC<InformationStudentProps> = React.memo(({ student, classmates }) => {
+    const filteredClassmates = useMemo(() => filterClassmates(classmates, student), [classmates, student]);
     const displayCount = 5;
 
     return (
@@ -54,7 +60,7 @@ const InformationStudent: React.FC<InformationStudentProps> = React.memo(({ stud
                 <div className="item">
                     <p className="label">People from the same class</p>
                     <div className="classmates-images">
-                        {classmates.slice(0, displayCount).map(classmate => (
+                        {filteredClassmates.slice(0, displayCount).map(classmate => (
                             <img
                                 key={classmate.studentID}
                                 src={classmate.imageUrl}
@@ -62,8 +68,8 @@ const InformationStudent: React.FC<InformationStudentProps> = React.memo(({ stud
                                 className="classmate-image"
                             />
                         ))}
-                        {classmates.length > displayCount && (
-                            <span className="more-classmates">+{classmates.length - displayCount} more</span>
+                        {filteredClassmates.length > displayCount && (
+                            <span className="more-classmates">+{filteredClassmates.length - displayCount} more</span>
                         )}
                     </div>
                 </div>
