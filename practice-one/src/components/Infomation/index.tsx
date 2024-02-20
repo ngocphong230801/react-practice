@@ -22,7 +22,10 @@ const filterClassmates = (allClassmates: StudentProfile[], currentStudent: Stude
 
 
 const InformationStudent: React.FC<InformationStudentProps> = React.memo(({ student, classmates }) => {
-    const filteredClassmates = useMemo(() => filterClassmates(classmates, student), [classmates, student]);
+    const classmatesList = useMemo(() => 
+        filterClassmates(classmates, student),
+        [classmates, student]
+    );
     const displayCount = 5;
 
     return (
@@ -60,7 +63,7 @@ const InformationStudent: React.FC<InformationStudentProps> = React.memo(({ stud
                 <div className="item">
                     <p className="label">People from the same class</p>
                     <div className="classmates-images">
-                        {filteredClassmates.slice(0, displayCount).map(classmate => (
+                        {classmatesList .slice(0, displayCount).map(classmate => (
                             <img
                                 key={classmate.studentID}
                                 src={classmate.imageUrl}
@@ -68,8 +71,8 @@ const InformationStudent: React.FC<InformationStudentProps> = React.memo(({ stud
                                 className="classmate-image"
                             />
                         ))}
-                        {filteredClassmates.length > displayCount && (
-                            <span className="more-classmates">+{filteredClassmates.length - displayCount} more</span>
+                        {classmatesList .length > displayCount && (
+                            <span className="more-classmates">+{classmatesList .length - displayCount} more</span>
                         )}
                     </div>
                 </div>

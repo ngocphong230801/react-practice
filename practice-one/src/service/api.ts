@@ -21,16 +21,17 @@ export const addStudentToAPI = async (studentData: IFormInput) => {
     }
 };
 
-export const fetchStudentsAPI = async (): Promise<StudentProfile[] | string> => {
-    try {
-        const response = await fetch("https://657bfea7394ca9e4af152952.mockapi.io/api/students/students");
-        if (!response.ok) {
-            throw new Error('Error fetching students');
-        }
-        const studentsData: StudentProfile[] = await response.json();
-        return studentsData;
-    } catch (error) {
-        console.error('Error fetching students:', error);
-        return error instanceof Error ? error.message : 'Unknown error';
-    }
+export const fetchStudentsAPI = (): Promise<StudentProfile[]> => {
+    return fetch("https://657bfea7394ca9e4af152952.mockapi.io/api/students/students")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error fetching students');
+            }
+            return response.json();
+        })
+        .then((studentsData: StudentProfile[]) => studentsData)
+        .catch(error => {
+            console.error('Error fetching students:', error);
+            throw error;
+        });
 };

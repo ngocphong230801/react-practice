@@ -52,7 +52,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
         control,
         handleSubmit,
         reset,
-        formState: { errors, dirtyFields }
+        formState: { errors, dirtyFields, isSubmitting, isValid  }
     } = useForm<IFormInput>({
         defaultValues: defaultFormValues,
         mode: 'onChange'
@@ -60,24 +60,17 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [imagePreviewUrl, setImagePreviewUrl] = useState<string>('');
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
-    const [isImageSelected, setIsImageSelected] = useState(false);
 
     const onSubmit = async (data: IFormInput) => {
         let uploadedImageUrl = null;
-        if (Object.keys(errors).length > 0) {
-            return;
-        }
         if (imageFile) {
             try {
                 const uploadResult = await uploadImage(imageFile);
-                setIsSubmitting(true);
                 uploadedImageUrl = uploadResult.data;
             } catch (error) {
                 console.error("Error uploading image:", error);
                 setErrorMessage("Failed to upload image. Please try again.");
-                setIsSubmitting(false);
                 return;
             }
         }
@@ -99,25 +92,37 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
         } catch (error) {
             console.error("Error in onSubmit:", error);
             setErrorMessage("An error occurred. Please try again.");
-        } finally {
-            setIsSubmitting(false);
         }
     };
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files && event.target.files[0];
-        if (file) {
-            const validFormats = ['image/jpeg', 'image/png'];
-            const maxFileSize = 5 * 1024 * 1024;
-    
-            !validFormats.includes(file.type)
-                ? (setErrorMessage("Invalid file format. Only PNG and JPG are allowed."), setIsImageSelected(false))
-                : file.size > maxFileSize
-                    ? (setErrorMessage(`File is too large. Maximum size allowed is ${maxFileSize / 1024 / 1024}MB.`), setIsImageSelected(false))
-                    : (setErrorMessage(''), setImageFile(file), setImagePreviewUrl(URL.createObjectURL(file)), setIsImageSelected(true));
-        } else {
-            setIsImageSelected(false);
+        if (!file) {
+            setImageFile(null);
+            setImagePreviewUrl('');
+            return;
         }
+    
+        const validFormats = ['image/jpeg', 'image/png'];
+        const maxFileSize = 5 * 1024 * 1024;
+    
+        if (!validFormats.includes(file.type)) {
+            setErrorMessage("Invalid file format. Only PNG and JPG are allowed.");
+            setImageFile(null);
+            setImagePreviewUrl('');
+            return;
+        }
+    
+        if (file.size > maxFileSize) {
+            setErrorMessage(`File is too large. Maximum size allowed is ${maxFileSize / 1024 / 1024}MB.`);
+            setImageFile(null);
+            setImagePreviewUrl('');
+            return;
+        }
+    
+        setErrorMessage('');
+        setImageFile(file);
+        setImagePreviewUrl(URL.createObjectURL(file));
     };
     
     const isAnyFieldDirty = Object.keys(dirtyFields).length > 0;
@@ -283,7 +288,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ closeForm, onStudentAdd }) =>
                         className="btn-default add-student"
                         title={isSubmitting ? "Adding..." : "Add Student"}
                         buttonType="submit"
-                        disabled={isSubmitting || !isImageSelected}
+                        disabled={isSubmitting || !isValid || !imageFile}
                     />
                 </div>
             </div>

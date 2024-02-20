@@ -14,7 +14,7 @@ import './SideBar.css';
 // children
 import SidebarItem from './SideBarItem';
 
-const SideBar: React.FC = (): React.ReactElement => {
+const SideBar: React.FC = React.memo((): React.ReactElement => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -55,6 +55,6 @@ const SideBar: React.FC = (): React.ReactElement => {
       </a>
     </div>
   );
-};
+});
 
 export default SideBar;

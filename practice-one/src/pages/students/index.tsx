@@ -46,25 +46,30 @@ const StudentPage: React.FC = (): React.ReactElement => {
         try {
             setLoading(true);
             const result = await fetchStudentsAPI();
-            if (typeof result === 'string') {
-                alert(result);
-                setSelectedStudent(null);
-            } else {
+    
+            if (Array.isArray(result)) {
                 setStudents(result);
-                if (result.length > 0) {
-                    setSelectedStudent(result[0]);
-                } else {
-                    setSelectedStudent(null);
-                }
+                setSelectedStudent(result.length > 0 ? result[0] : null);
+            } else {
+                console.error(result);
+                alert("Failed to fetch students. Please try again later.");
+                setSelectedStudent(null);
+                setStudents([]);
             }
+        } catch (error) {
+            console.error(error);
+            alert("An unexpected error occurred. Please try again later.");
+            setSelectedStudent(null);
+            setStudents([]);
         } finally {
             setLoading(false);
         }
     };
-
-    const handleAddStudentClick = () => {
-        setShowStudentForm(!showStudentForm);
-    };
+    
+    const handleAddStudentClick = useCallback(() => {
+        setShowStudentForm(prev => !prev);
+      }, []);
+      
 
     const handleCloseForm = () => {
         setShowStudentForm(false);
@@ -75,9 +80,9 @@ const StudentPage: React.FC = (): React.ReactElement => {
         handleCloseForm();
     };
 
-    const handleStudentSelect = (student: StudentProfile) => {
+    const handleStudentSelect = useCallback((student: StudentProfile) => {
         setSelectedStudent(student);
-    };
+    }, []);
 
     return (
         <div className="container">
@@ -87,9 +92,9 @@ const StudentPage: React.FC = (): React.ReactElement => {
                     <span className="log-out">Logout</span>
                     <img src={mention} alt="mention" className="icon-mention" />
                 </div>
-    
+
                 {loading ? (
-                    <div className="loader-container">
+                    <div className="loader-container">  
                         <div className="loader"></div>
                         <p>Loading...</p>
                     </div>
@@ -110,7 +115,7 @@ const StudentPage: React.FC = (): React.ReactElement => {
                                         </div>
                                     </div>
                                 </div>
-    
+
                                 <div className="search-box-empty">
                                     <select className="filter">
                                         <option value="default">Add filter</option>
@@ -138,12 +143,12 @@ const StudentPage: React.FC = (): React.ReactElement => {
                                 </div>
                             </>
                         )}
-    
+
                         {showStudentForm && <div className="overlay" onClick={handleCloseForm}></div>}
                         {showStudentForm && (
                             <StudentForm closeForm={handleCloseForm} onStudentAdd={handleStudentAdded} />
                         )}
-    
+
                         {students.length === 0 ? (
                             <div className="no-student">
                                 <img src={EmptyPage} alt="empty-page-image" />
@@ -166,7 +171,7 @@ const StudentPage: React.FC = (): React.ReactElement => {
                 )}
             </div>
         </div>
-    );    
-}
+    );
+};
 
 export default StudentPage;

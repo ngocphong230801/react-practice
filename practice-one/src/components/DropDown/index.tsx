@@ -35,7 +35,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
                 rules={isRequired ? { required: requiredMessage } : {}}
                 render={({ field }) => (
                     <select {...field}
-                        className={`select-item ${field.value === '' ? 'default-selected' : 'option-selected'}`}
+                        className={`select-item ${!field.value ? 'default-selected' : 'option-selected'}`}
                         onChange={(e) => {
                             field.onChange(e);
                         }}>
