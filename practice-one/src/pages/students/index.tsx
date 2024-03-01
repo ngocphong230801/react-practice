@@ -1,5 +1,5 @@
 // react
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, memo, useMemo } from "react";
 
 // layout
 import SideBar from "@layouts/SideBar";
@@ -13,7 +13,7 @@ import InformationStudent from "@components/Infomation";
 import StudentForm from "@components/Form";
 
 // types
-import { StudentProfile } from "src/types/studentProfile";
+import { IStudentInformation, StudentProfile } from "src/types/studentProfile";
 
 // assets
 import { EmptyPage } from "@assets/image";
@@ -26,9 +26,12 @@ import { fetchStudentsAPI } from "@service/api";
 const StudentPage: React.FC = (): React.ReactElement => {
     const [showStudentForm, setShowStudentForm] = useState(false);
     const [students, setStudents] = useState<StudentProfile[]>([]);
-    const [selectedStudent, setSelectedStudent] = useState<StudentProfile | null>(null);
+    const [selectedStudent, setSelectedStudent] =
+        useState<StudentProfile | null>(null);
     const [loading, setLoading] = useState(false);
-    const [filteredStudents, setFilteredStudents] = useState<StudentProfile[]>([]);
+    const [filteredStudents, setFilteredStudents] = useState<StudentProfile[]>(
+        []
+    );
 
     useEffect(() => {
         fetchStudents();
@@ -46,7 +49,6 @@ const StudentPage: React.FC = (): React.ReactElement => {
         try {
             setLoading(true);
             const result = await fetchStudentsAPI();
-    
             if (Array.isArray(result)) {
                 setStudents(result);
                 setSelectedStudent(result.length > 0 ? result[0] : null);
@@ -65,24 +67,36 @@ const StudentPage: React.FC = (): React.ReactElement => {
             setLoading(false);
         }
     };
-    
+
     const handleAddStudentClick = useCallback(() => {
-        setShowStudentForm(prev => !prev);
-      }, []);
-      
+        setShowStudentForm((prev) => !prev);
+    }, []);
 
-    const handleCloseForm = () => {
+    const handleCloseForm = useCallback(() => {
         setShowStudentForm(false);
-    };
+    }, []);
 
-    const handleStudentAdded = () => {
+    const handleStudentAdded = useCallback(() => {
         fetchStudents();
         handleCloseForm();
-    };
+    }, []);
 
     const handleStudentSelect = useCallback((student: StudentProfile) => {
         setSelectedStudent(student);
     }, []);
+
+    const dataStudentInfo = useMemo(
+        (): IStudentInformation[] =>
+            filteredStudents.map((student: StudentProfile) => {
+                return {
+                    imageUrl: student.imageUrl,
+                    name: student.name,
+                    studentID: student.studentID,
+                    classes: student.classes,
+                };
+            }),
+        [filteredStudents]
+    );
 
     return (
         <div className="container">
@@ -94,7 +108,7 @@ const StudentPage: React.FC = (): React.ReactElement => {
                 </div>
 
                 {loading ? (
-                    <div className="loader-container">  
+                    <div className="loader-container">
                         <div className="loader"></div>
                         <p>Loading...</p>
                     </div>
@@ -103,9 +117,16 @@ const StudentPage: React.FC = (): React.ReactElement => {
                         {students.length === 0 ? (
                             <>
                                 <div className="student-controls-empty">
-                                    <p className="student-section-title">Students</p>
+                                    <p className="student-section-title">
+                                        Students
+                                    </p>
                                     <div className="student-action-container">
-                                        <a href="#" className="export-csv-empty">Export CSV</a>
+                                        <a
+                                            href="#"
+                                            className="export-csv-empty"
+                                        >
+                                            Export CSV
+                                        </a>
                                         <div className="button-container-empty">
                                             <Button
                                                 title="Add student"
@@ -118,15 +139,26 @@ const StudentPage: React.FC = (): React.ReactElement => {
 
                                 <div className="search-box-empty">
                                     <select className="filter">
-                                        <option value="default">Add filter</option>
+                                        <option value="default">
+                                            Add filter
+                                        </option>
                                     </select>
-                                    <img src={search} alt="icon-search" className="icon-search" />
-                                    <StudentSearch students={students} onSearchResult={handleSearchResult} />
+                                    <img
+                                        src={search}
+                                        alt="icon-search"
+                                        className="icon-    search"
+                                    />
+                                    <StudentSearch
+                                        students={students}
+                                        onSearchResult={handleSearchResult}
+                                    />
                                 </div>
                             </>
                         ) : (
                             <>
-                                <a href="#" className="export-csv">Export CSV</a>
+                                <a href="#" className="export-csv">
+                                    Export CSV
+                                </a>
                                 <div className="button-container">
                                     <Button
                                         title="Add student"
@@ -136,24 +168,46 @@ const StudentPage: React.FC = (): React.ReactElement => {
                                 </div>
                                 <div className="search-box">
                                     <select className="filter">
-                                        <option value="default">Add filter</option>
+                                        <option value="default">
+                                            Add filter
+                                        </option>
                                     </select>
-                                    <img src={search} alt="icon-search" className="icon-search" />
-                                    <StudentSearch students={students} onSearchResult={handleSearchResult} />
+                                    <img
+                                        src={search}
+                                        alt="icon-search"
+                                        className="icon-search"
+                                    />
+                                    <StudentSearch
+                                        students={students}
+                                        onSearchResult={handleSearchResult}
+                                    />
                                 </div>
                             </>
                         )}
 
-                        {showStudentForm && <div className="overlay" onClick={handleCloseForm}></div>}
                         {showStudentForm && (
-                            <StudentForm closeForm={handleCloseForm} onStudentAdd={handleStudentAdded} />
+                            <div
+                                className="overlay"
+                                onClick={handleCloseForm}
+                            ></div>
+                        )}
+                        {showStudentForm && (
+                            <StudentForm
+                                closeForm={handleCloseForm}
+                                onStudentAdd={handleStudentAdded}
+                            />
                         )}
 
                         {students.length === 0 ? (
                             <div className="no-student">
                                 <img src={EmptyPage} alt="empty-page-image" />
-                                <h2 className="empty-message">No students at this time</h2>
-                                <p className="enrollment-message">Students will appear here after they enroll in your school.</p>
+                                <h2 className="empty-message">
+                                    No students at this time
+                                </h2>
+                                <p className="enrollment-message">
+                                    Students will appear here after they enroll
+                                    in your school.
+                                </p>
                                 <Button
                                     className="btn-secondary"
                                     title="Support"
@@ -163,8 +217,16 @@ const StudentPage: React.FC = (): React.ReactElement => {
                             </div>
                         ) : (
                             <>
-                                <ListStudent students={filteredStudents} onStudentClick={handleStudentSelect} />
-                                {selectedStudent && <InformationStudent student={selectedStudent} classmates={filteredStudents} />}
+                                <ListStudent
+                                    students={filteredStudents}
+                                    onStudentClick={handleStudentSelect}
+                                />
+                                {selectedStudent && (
+                                    <InformationStudent
+                                        student={selectedStudent}
+                                        classmates={dataStudentInfo}
+                                    />
+                                )}
                             </>
                         )}
                     </>
@@ -174,4 +236,4 @@ const StudentPage: React.FC = (): React.ReactElement => {
     );
 };
 
-export default StudentPage;
+export default memo(StudentPage);

@@ -9,3 +9,10 @@ export interface StudentProfile {
     imageUrl: string;
     age: number;
 }
+
+export interface IStudentInformation {
+    name: string;
+    studentID: number;
+    imageUrl: string;
+    classes: string;
+} 
