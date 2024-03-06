@@ -37,7 +37,7 @@
 
 ## Deploy:
 
-- App: [Here](https://practice-one-eight.vercel.app/)
+- App: [Here](https://react-practice-olive.vercel.app/)
 - Storybook: [Here](https://practice-react-sepia.vercel.app/?path=/story/components-footer--default)
 
 ## Information:
@@ -60,37 +60,39 @@ practice-one
     |-- assets
         |-- font
         |-- icon
+        |-- image
     |-- components
         |-- common
             |-- Button
-            |-- Heading
+            |-- Header
             |-- Input
-            |-- Label
+            |-- Icon
             |-- Sizebar
-            |-- index
         |-- ListStudent
             |-- Student
         |-- Infomation
         |-- Form
-        |-- index
+        |-- DropDown
+        |-- SearchBox
     |-- constants
-        |-- base-url
-        |-- nav-link
-        |-- regex
+        |-- dropdownData
+        |-- sidebar
+        |-- validateFormegex
     |-- helper
-        |-- vaildation
+        |-- uploadImage
     |-- pages
         |-- Student
         |-- Dashboard
-        |-- index
     |-- routers
         |-- index
+    |-- service
+        |-- api.ts
     |-- types
-        |-- TAction
-        |-- TButton
-        |-- THeading
-        |-- TStudent
-        |-- TVariant
+        |-- header
+        |-- heading
+        |-- index
+        |-- studentProfile
+        |-- variant
     |-- App.tsx
     |-- main.tsx
     |-- index.css

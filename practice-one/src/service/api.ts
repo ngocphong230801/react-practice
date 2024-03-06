@@ -1,11 +1,5 @@
-interface IFormInput {
-    name: string;
-    email: string;
-    phone: string;
-    gender: string;
-    password: string;
-    classes: string;
-}
+import { StudentProfile } from "@type/studentProfile";
+import { IFormInput } from "@components/Form";
 
 export const addStudentToAPI = async (studentData: IFormInput) => {
     try {
@@ -25,4 +19,19 @@ export const addStudentToAPI = async (studentData: IFormInput) => {
     } catch (error) {
         console.error('Error adding student:', error);
     }
+};
+
+export const fetchStudentsAPI = (): Promise<StudentProfile[]> => {
+    return fetch("https://657bfea7394ca9e4af152952.mockapi.io/api/students/students")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error fetching students');
+            }
+            return response.json();
+        })
+        .then((studentsData: StudentProfile[]) => studentsData)
+        .catch(error => {
+            console.error('Error fetching students:', error);
+            throw error;
+        });
 };

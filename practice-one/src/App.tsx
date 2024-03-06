@@ -7,7 +7,7 @@ import { routers } from "./routers";
 
 // pages
 import DashboadPage from './pages/dashboad'
-import StudentPage from './pages/student';
+import StudentPage from './pages/students';
 
 function App() {
   return (

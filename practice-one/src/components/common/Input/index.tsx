@@ -1,5 +1,5 @@
 // react
-import { ChangeEventHandler, forwardRef } from "react";
+import React, { ChangeEventHandler, forwardRef } from "react";
 
 // css
 import "./Input.css";
@@ -11,15 +11,15 @@ type CustomInputProps = {
   placeholder?: string;
   className?: string;
   type: string;
-  name?: string;
-  value?: string | number;
+  name: string;
+  value: string | number;
   variant?: Variant;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
+  onChange: ChangeEventHandler<HTMLInputElement>;
   error?: string | null;
   disabled?: boolean;
 };
 
-const Input = forwardRef<HTMLInputElement, CustomInputProps>(
+const Input = React.memo (forwardRef<HTMLInputElement, CustomInputProps>(
   ({ placeholder, className, value, name, type, variant = Variant, onChange, error, disabled }, ref) => {
     const inputClassName = `${className} input ${variant} ${error ? "error" : ""}`;
 
@@ -39,6 +39,6 @@ const Input = forwardRef<HTMLInputElement, CustomInputProps>(
       </div>
     );
   }
-);
+));
 
 export default Input;

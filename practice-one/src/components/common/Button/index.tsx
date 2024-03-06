@@ -9,7 +9,7 @@ type CustomBtnProps = {
     className?: string;
     iconLeft?: ReactNode;
     iconRight?: ReactNode;
-    title?: string;
+    title: string;
     variant?: Variant;
     disabled?: boolean;
     loading?: boolean;
@@ -17,7 +17,7 @@ type CustomBtnProps = {
     onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
-const Button: React.FC<CustomBtnProps> = ({
+const Button: React.FC<CustomBtnProps> = React.memo (({
     className,
     onClick,
     title,
@@ -31,6 +31,6 @@ const Button: React.FC<CustomBtnProps> = ({
     <button type={buttonType} className={`${className} btn btn-${variant}`} onClick={onClick} disabled={disabled || loading}>
         {loading ? "Loading..." : <>{iconLeft}{title}{iconRight}</> } 
     </button>
-);
+));
 
 export default Button
