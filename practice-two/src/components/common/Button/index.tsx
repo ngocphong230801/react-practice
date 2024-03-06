@@ -1,5 +1,10 @@
+// react
 import React, { MouseEventHandler, ReactNode } from 'react';
-import './Button.css';
+
+// item
+import './index.css';
+
+// type
 import { ButtonVariant } from '@type/varianButton';
 
 interface CustomButtonProps {
