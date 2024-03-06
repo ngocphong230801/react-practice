@@ -1,0 +1,45 @@
+.header {
+    font-family: var(--font-primary);
+    background-color: var(--background-secondary);
+    width: 1440px;
+    height: 95px;
+    justify-content: space-around;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    z-index: 900;
+}
+
+.header .icon-notify {
+    position: absolute;
+    right: 295px;
+    top: 40px;
+    cursor: pointer;
+}
+
+.header .btn {
+    position: absolute;
+    right: 127px;
+    top: 34px;
+}
+
+.header .title {
+    font-size: var(--font-size-text-md);
+    font-weight: var(--font-weight-light);
+    margin-top: 44px;
+    margin-left: 147.5px;
+}
+
+.header .content {
+    font-size: var(--font-size-text-md);
+    font-weight: var(--font-weight-base);
+    margin-left: 147.5px;
+}
+
+.header .log-out {
+    position: absolute;
+    right: 120px;
+    top: 40px;
+    cursor: pointer;
+    font-weight: var(--font-weight-semibold);
+}

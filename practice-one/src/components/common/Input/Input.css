@@ -1,0 +1,27 @@
+.input {
+    width: 248px;
+    height: 42px;
+    border-radius: 4px;
+    border: 0.5px solid var(--color-text-septenary);
+    padding-left: 10px;
+}
+
+.primary {
+    width: 325px;
+    height: 42px;
+}
+
+.secondary {
+    width: 645px;
+    padding: 16px 20px 16px 16px;
+    background-color: var(--background-secondary);
+    overflow: visible;
+    border: none;
+    color: var(--color-text-octonary);
+    font-family: Kumbh Sans;
+    font-size: var(--color-text-octonary);
+}
+
+.secondary:focus {
+    outline: none;
+}

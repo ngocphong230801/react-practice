@@ -1,0 +1,78 @@
+.dashboad-page {
+    position: relative;
+}
+
+.dashboad-page .btn-default {
+    position: absolute;
+    left: 1192px;
+    top: 34px;
+    z-index: 1000;
+}
+
+.dashboad-page .sidebar {
+    z-index: 1000;
+}
+
+.dashboad-page .dashboad-page-header {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.dashboad-page .dashboad-page-body {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 148px;
+}
+
+.dashboad-page .greeting {
+    color: var(--color-text-quaternary);
+    text-align: center;
+    font-size: var(--font-size-text-3xl);
+    font-weight: var(--font-weight-semibold);
+    margin-top: 53px;
+    margin-left: 395px;
+}
+
+.dashboad-page .school-mail {
+    color: var(--color-text-quaternary);
+    font-size: 24px;
+    font-weight: 600;
+    margin-left: 473px;
+    margin-top: 23px;
+}
+
+.dashboad-page .funtion {
+    margin-left: 457px;
+    margin-top: 74px;
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+}
+
+.dashboad-page .funtion-item-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.dashboad-page .funtion-item-title {
+    width: 239px;
+    color: var(--color-text-quaternary);
+    font-size: var(--font-size-text-xl);
+    font-weight: var(--font-weight-light);
+}
+
+.dashboad-page .funtion-item-content {
+    width: 475px;
+    color: var(--color-text-quaternary);
+    font-size: var(--font-size-text-base);
+    margin-top: 16px;
+    margin-left: 42px;
+    line-height: 18px;
+}
+
+.dashboad-page .btn-secondary {
+    position: absolute;
+    top: 565px;
+}

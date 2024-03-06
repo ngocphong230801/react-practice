@@ -1,0 +1,110 @@
+.studen-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 969px;
+    height: 691px;
+    background-color: var(--background-default);
+    display: flex;
+    flex-direction: column;
+    gap: 54px;
+    z-index: 2000;
+    transform: translate(-50%, -50%);
+}
+
+.studen-form .icon-close {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 60px;
+    right: 90px;
+}
+
+.studen-form .form-header {
+    margin-top: 102px;
+    margin-left: 83px;
+}
+
+.studen-form .heading-form {
+    color: var(--color-text-quaternary);
+    font-size: var(--font-size-text-2xl);
+    font-weight: var(--font-weight-semibold);
+}
+
+.studen-form .link-group {
+    margin-top: 30px;
+    display: flex;
+    gap: 73px;
+}
+
+.studen-form .link-group-item {
+    color: var(--color-text-quaternary);
+    font-size: var(--font-size-text-lg);
+    font-weight: var(--font-weight-light);
+}
+
+.studen-form .form-body {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.studen-form .form-body-item {
+    display: flex;
+    gap: 47px;
+    margin-left: 81px;
+}
+
+.studen-form .item {
+    display: flex;
+    flex-direction: column;
+}
+
+.studen-form .item-title {
+    margin-bottom: 5px;
+    color: var(--color-text-octonary);
+    font-size: var(--font-size-text-base);
+}
+
+.studen-form .btn-action {
+    display: flex;
+    gap: 50px;
+    position: absolute;
+    bottom: 30px;
+    left: 280px;
+}
+
+.error-message {
+    display: block;
+    color: var(--error-message-primary);
+    margin-top: 2px;
+    font-size: var(--font-size-text-base);
+    margin-bottom: 0;
+}
+
+.studen-form .upload-img {
+    position: absolute;
+    bottom: 140px;
+    left: 370px
+}
+
+.studen-form .image-preview {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    right: 330px;
+    bottom: 80px;
+}
+
+.studen-form .error-img {
+    position: absolute;
+    bottom: 70px;
+    left: 500px;
+}
+
+
+.studen-form .image-error {
+    position: absolute;
+    bottom: 120px;
+    left: 300px;
+}

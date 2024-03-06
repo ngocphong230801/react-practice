@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Font */
+  --font-primary: 'Kumbh Sans', sans-serif; 
+
+   /* Text-color */
+  --color-text-default: #fff;
+  --color-text-primary: #424242;
+  --color-text-secondary: #fcfcfc;
+  --color-text-tertiary: #2671b1;
+  --color-text-quaternary: #4f4f4f;
+  --color-text-quinary: #73b0e2;
+  --color-text-senary: #1a1a1a;
+  --color-text-septenary: #a7a7a7;
+  --color-text-octonary: #8a8a8a;
+
+  /* Text font size*/
+  --font-size-text-3xl: 36px;
+  --font-size-text-2xl: 32px;
+  --font-size-text-xl: 24px;
+  --font-size-text-lg: 18px;
+  --font-size-text-md: 16px;
+  --font-size-text-base: 14px;
+  --font-size-text-sm: 12px;
+
+  /* Font weight */
+  --font-weight-base: 400;
+  --font-weight-light: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Background */
+  --background-default: #fff;
+  --background-primary: #509cdb;
+  --background-secondary: #fcfafa;
+  --background-tertiary: #152259;
+  --background-quaternary: #f1f1f1;
+
+  /* Webkit-scrollbar */
+  --webkit-scrollbar-default :#dbdee5;
+  --webkit-scrollbar-primary: #34A853;
+  --webkit-scrollbar-secondary: #4285F4;
+
+  /* Error message */
+  --error-message-primary: red;
+}
