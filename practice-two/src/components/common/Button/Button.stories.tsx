@@ -1,51 +1,70 @@
-// react
-import type { Meta, StoryObj } from "@storybook/react";
-
-// types
-import { ButtonVariant } from "@type/varianButton";
-
-// components
-import { CheckDownIcon,SupportIcon } from "../Icon";
-
+// storybook
+import { Meta, StoryObj } from '@storybook/react';
+import { text, boolean, select } from '@storybook/addon-knobs';
 
 // item
-import Button from ".";
+import Button, { CustomButtonProps} from '.';
+
+// icon
+import { SupportIcon, CheckDownIcon } from '../Icon';
+
+//type
+import { ButtonVariant } from '@type/button';
 
 export default {
-    title: "Components/Button",
+    title: 'Components/Button',
     component: Button,
-} as Meta;
+} as Meta<typeof Button>;
 
-type Story = StoryObj<typeof Button>;
+const Template = (args: CustomButtonProps) => <Button {...args} />;
 
-export const Default: Story = {
+export const Default: StoryObj<typeof Button> = {
+    render: Template,
     args: {
-        variant: ButtonVariant.DEFAULT,
-        title: "Add Student",
-        loading: false,
-        disabled: false,
-        buttonType: "button",
+        variant: select('Variant', { DEFAULT: ButtonVariant.DEFAULT, PRIMARY: ButtonVariant.PRIMARY }, ButtonVariant.DEFAULT),
+        title: text('Title', 'Add Student'),
+        loading: boolean('Loading', false),
+        disabled: boolean('Disabled', false),
+        buttonType: 'button',
     },
 };
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof Button> = {
+    ...Default,
     args: {
+        ...Default.args,
         variant: ButtonVariant.PRIMARY,
-        title: "Add Student",
-        loading: false,
-        disabled: false,
-        buttonType: "button",
     },
 };
 
-export const Secondary: Story = {
+export const Secondary: StoryObj<typeof Button> = {
+    ...Default,
     args: {
+        ...Default.args,
         variant: ButtonVariant.SECONDARY,
         iconLeft: <SupportIcon />,
-        title: "Support",
+        title: text('Title', 'Support'),
         iconRight: <CheckDownIcon />,
-        loading: false,
-        disabled: false,
-        buttonType: "button",
     },
+    parameters: {
+        docs: {
+            description: {
+                story: 'A secondary button with left and right icons.',
+            },
+        },
+    },
+    decorators: [
+        (Story) => {
+            const iconLeft = text('Icon Left', '');
+            const iconRight = text('Icon Right', '');
+
+            return (
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    {iconLeft && <div style={{ marginRight: '8px' }}>{iconLeft}</div>}
+                    <Story />
+                    {iconRight && <div style={{ marginLeft: '8px' }}>{iconRight}</div>}
+                </div>
+            );
+        },
+    ],
 };

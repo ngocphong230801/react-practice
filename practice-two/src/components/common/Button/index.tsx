@@ -1,13 +1,13 @@
 // react
-import React, { MouseEventHandler, ReactNode } from 'react';
+import React, { MouseEventHandler, ReactNode, useCallback  } from 'react';
 
 // item
 import './index.css';
 
 // type
-import { ButtonVariant } from '@type/varianButton';
+import { ButtonVariant } from '@type/button';
 
-interface CustomButtonProps {
+export interface CustomButtonProps {
     className?: string;
     iconLeft?: ReactNode;
     iconRight?: ReactNode;
@@ -16,7 +16,7 @@ interface CustomButtonProps {
     disabled?: boolean;
     loading?: boolean;
     buttonType?: 'button' | 'submit' | 'reset';
-    onClick?: MouseEventHandler<HTMLButtonElement>;
+    onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 const Button: React.FC<CustomButtonProps> = React.memo(({
@@ -30,7 +30,7 @@ const Button: React.FC<CustomButtonProps> = React.memo(({
     buttonType = 'button',
     onClick,
 }) => {
-    const renderContent = () => {
+    const renderContent = useCallback(() => {
         if (loading) return 'Loading...';
         return (
             <>
@@ -39,7 +39,7 @@ const Button: React.FC<CustomButtonProps> = React.memo(({
                 {iconRight}
             </>
         );
-    };
+    }, [loading, iconLeft, iconRight, title]);
 
     return (
         <button
