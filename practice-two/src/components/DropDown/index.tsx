@@ -6,9 +6,8 @@ interface DropdownSelectProps {
     name: string;
     label: string;
     options: { value: string; label: string; color?: string }[];
-    control: Control;
+    control: Control<any>;
     requiredMessage?: string;
-    isRequired?: boolean;
     error?: string | null;
     disabled: boolean;
 }
@@ -18,8 +17,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
     label,
     options,
     control,
-    requiredMessage = "This field is required",
-    isRequired = true,
+    requiredMessage,
     error,
     disabled,
 }) => (
@@ -28,7 +26,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
         <Controller
             name={name}
             control={control}
-            rules={{ required: isRequired ? requiredMessage : false }}
+            rules={{ required: requiredMessage ? true : false }}
             render={({ field: { onChange, value, ref } }) => (
                 <select
                     id={name}
@@ -38,7 +36,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
                     disabled={disabled}
                     className={`dropdown-select ${value ? 'selected' : 'placeholder'}`}
                 >
-                    <option disabled={!isRequired || value} value="">
+                    <option disabled={!requiredMessage || value} value="">
                         {label}
                     </option>
                     {options.map(({ value, label }) => (
@@ -49,6 +47,9 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
                 </select>
             )}
         />
+        {requiredMessage && (
+            <span className="required-message">{requiredMessage}</span>
+        )}
         {error && <span className="error-message">{error}</span>}
     </div>
 );
