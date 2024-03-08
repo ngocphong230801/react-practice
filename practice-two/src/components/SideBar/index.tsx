@@ -1,6 +1,5 @@
-// react
 import React, { useCallback, useMemo } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 
 // assets
 import { feature } from '@assets/icon';
@@ -16,12 +15,12 @@ import './index.css';
 import SidebarItem from './SideBarItem';
 
 const SideBar: React.FC = React.memo(() => {
-  const navigate = useNavigate()
-  const location = useLocation()
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleNavigation = useCallback((url: string) => {
-    navigate(url)
-  }, [navigate])
+    navigate(url);
+  }, [navigate]);
 
   const renderList = useMemo(() => {
     return SIDEBAR_ITEM.map((item) => {
@@ -40,22 +39,22 @@ const SideBar: React.FC = React.memo(() => {
         />
       );
     });
-  }, [SIDEBAR_ITEM, handleNavigation, location.pathname]);
+  }, [handleNavigation, location.pathname]);
 
   return (
     <div className="sidebar">
       <div className="sidebar-header">
-        <a href="#" className="logo">
+        <NavLink to="/" className="logo">
           <img src={logo} alt="logo" />
-        </a>
+        </NavLink>
         <h1 className="sidebar-heading">Udemy Inter. School</h1>
       </div>
       <ul className="sidebar-menu">{renderList}</ul>
-      <a href="#" className="sidebar-feature">
+      <NavLink to="/feature" className="sidebar-feature">
         <img src={feature} alt="Feature" />
         <span className="sidebar-item-content">Feature</span>
         <p className="new-item">New</p>
-      </a>
+      </NavLink>
     </div>
   );
 });
