@@ -8,7 +8,6 @@ type SidebarItem = {
   url?: string;
 };
 
-
 const SIDEBAR_ITEM_MOCK: SidebarItem[] = [
   { label: 'Home', icon: 'path/to/home/icon', url: '/home' },
   { label: 'Courses', icon: 'path/to/courses/icon', url: '/courses' },

@@ -1,5 +1,5 @@
 // react
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 // assets
@@ -15,30 +15,32 @@ import './index.css';
 // children
 import SidebarItem from './SideBarItem';
 
-const SideBar: React.FC = React.memo((): React.ReactElement => {
-  const navigate = useNavigate();
-  const location = useLocation();
+const SideBar: React.FC = React.memo(() => {
+  const navigate = useNavigate()
+  const location = useLocation()
 
-  const handleNavigation = (url: string) => {
-    navigate(url);
-  };
+  const handleNavigation = useCallback((url: string) => {
+    navigate(url)
+  }, [navigate])
 
-  const renderList = SIDEBAR_ITEM.map((item) => {
-    const {id, label, icon, url } = item;
-
-    const isActive = location.pathname === url;
-
-    return (
-      <SidebarItem
-        key={id}
-        label={label}
-        icon={icon}
-        url={url || ''}
-        isActive={isActive}
-        onClick={() => url && handleNavigation(url)}
-      />
-    );
-  });
+  const renderList = useMemo(() => {
+    return SIDEBAR_ITEM.map((item) => {
+      const { id, label, icon, url } = item;
+  
+      const isActive = location.pathname === url;
+  
+      return (
+        <SidebarItem
+          key={id}
+          label={label}
+          icon={icon}
+          url={url || ''}
+          isActive={isActive}
+          onClick={() => url && handleNavigation(url)}
+        />
+      );
+    });
+  }, [SIDEBAR_ITEM, handleNavigation, location.pathname]);
 
   return (
     <div className="sidebar">

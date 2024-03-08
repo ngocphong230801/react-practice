@@ -1,4 +1,3 @@
-// react
 import React from 'react';
 
 interface SidebarItemProps {
@@ -9,17 +8,19 @@ interface SidebarItemProps {
   onClick: () => void;
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = ({
-  label,
-  icon,
-  url,
-  isActive,
-  onClick,
-}: SidebarItemProps): React.ReactElement => {
+const SidebarItem: React.FC<SidebarItemProps> = (
+  { label, icon, url, isActive, onClick }: SidebarItemProps
+): React.ReactElement => {
   const activeClass = isActive ? 'actives' : '';
 
+  const handleClick = () => {
+    if (url) {
+      onClick();
+    }
+  };
+
   return (
-    <li className={`sidebar-item ${activeClass}`} onClick={() => url && onClick()}>
+    <li className={`sidebar-item ${activeClass}`} onClick={handleClick}>
       <div className="sidebar-item">
         <img src={icon} alt={label} className="icon" />
         <span className="sidebar-item-content">{label}</span>
