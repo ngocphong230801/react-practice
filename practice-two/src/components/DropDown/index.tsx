@@ -2,11 +2,11 @@ import React from 'react';
 import { Controller, Control } from 'react-hook-form';
 import "./index.css";
 
-interface DropdownSelectProps {
+export interface DropdownSelectProps {
     name: string;
     label: string;
     options: { value: string; label: string; color?: string }[];
-    control: Control<any>;
+    control: Control;
     requiredMessage?: string;
     error?: string | null;
     disabled: boolean;
