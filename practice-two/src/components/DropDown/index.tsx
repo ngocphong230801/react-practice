@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Controller, Control } from 'react-hook-form';
 import "./index.css";
 
@@ -9,19 +9,20 @@ export interface DropdownSelectProps {
     control: Control;
     requiredMessage?: string;
     error?: string | null;
-    disabled: boolean;
+    isDisabled: boolean;
 }
 
-const DropdownSelect: React.FC<DropdownSelectProps> = ({
+const DropdownSelect: React.FC<DropdownSelectProps> = memo(({
     name,
     label,
     options,
     control,
     requiredMessage,
     error,
-    disabled,
-}) => (
-    <div className={`dropdown ${disabled ? 'disabled' : ''}`}>
+    isDisabled,
+}) =>
+ (
+    <div className={`dropdown ${isDisabled ? 'disabled' : ''}`}>
         <label htmlFor={name} className="dropdown-label">{label}</label>
         <Controller
             name={name}
@@ -33,7 +34,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
                     onChange={onChange}
                     value={value}
                     ref={ref}
-                    disabled={disabled}
+                    disabled={isDisabled}
                     className={`dropdown-select ${value ? 'selected' : 'placeholder'}`}
                 >
                     <option disabled={!requiredMessage || value} value="">
@@ -52,6 +53,6 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
         )}
         {error && <span className="error-message">{error}</span>}
     </div>
-);
+));
 
 export default DropdownSelect;

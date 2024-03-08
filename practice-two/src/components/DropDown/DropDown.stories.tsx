@@ -25,7 +25,7 @@ export const Default: StoryObj<DropdownSelectProps> = {
         name: 'Class',
         options: CLASS_OPTIONS,
         error: null,
-        disabled: false,
+        isDisabled: false,
     },
 };
 
@@ -44,6 +44,6 @@ export const Gender: StoryObj<DropdownSelectProps> = {
         name: 'Class',
         options: GENDER_OPTIONS,
         error: null,
-        disabled: false,
+        isDisabled: false,
     },
 };
