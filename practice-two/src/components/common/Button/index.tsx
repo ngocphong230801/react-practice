@@ -1,5 +1,4 @@
-// react
-import React, { MouseEventHandler, ReactNode, useCallback  } from 'react';
+import React, { ReactNode, memo } from 'react';
 
 // item
 import './index.css';
@@ -16,11 +15,27 @@ export interface CustomButtonProps {
     disabled?: boolean;
     loading?: boolean;
     buttonType?: 'button' | 'submit' | 'reset';
-    onClick: MouseEventHandler<HTMLButtonElement>;
+    onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const Button: React.FC<CustomButtonProps> = React.memo(({
-    className = '',
+const renderContent = (
+    iconLeft: ReactNode,
+    title: string,
+    iconRight: ReactNode,
+    loading: boolean,
+) => {
+    if (loading) return 'Loading...';
+    return (
+        <>
+            {iconLeft}
+            {title}
+            {iconRight}
+        </>
+    );
+};
+
+const Button: React.FC<CustomButtonProps> = memo(({
+    className,
     iconLeft,
     iconRight,
     title,
@@ -30,17 +45,6 @@ const Button: React.FC<CustomButtonProps> = React.memo(({
     buttonType = 'button',
     onClick,
 }) => {
-    const renderContent = useCallback(() => {
-        if (loading) return 'Loading...';
-        return (
-            <>
-                {iconLeft}
-                {title}
-                {iconRight}
-            </>
-        );
-    }, [loading, iconLeft, iconRight, title]);
-
     return (
         <button
             type={buttonType}
@@ -48,7 +52,7 @@ const Button: React.FC<CustomButtonProps> = React.memo(({
             disabled={disabled || loading}
             onClick={onClick}
         >
-            {renderContent()}
+            {renderContent(iconLeft, title, iconRight, loading)}
         </button>
     );
 });
