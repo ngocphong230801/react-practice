@@ -1,10 +1,10 @@
-import React, { ReactNode, memo, useCallback, useMemo, useRef } from 'react';
+import React, { ReactNode, memo, useMemo } from 'react';
 
 // Import CSS
 import './index.css';
 
 // Import type
-import { ButtonVariant } from '@type/button';
+import { ButtonType, ButtonVariant } from '@type/button';
 
 export interface CustomButtonProps {
   className?: string;
@@ -14,8 +14,8 @@ export interface CustomButtonProps {
   variant?: ButtonVariant;
   disabled?: boolean;
   loading?: boolean;
-  buttonType?: 'button' | 'submit' | 'reset';
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  buttonType?: ButtonType;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const Button: React.FC<CustomButtonProps> = memo(({
@@ -26,7 +26,7 @@ const Button: React.FC<CustomButtonProps> = memo(({
   variant = ButtonVariant.DEFAULT,
   disabled = false,
   loading = false,
-  buttonType = 'button',
+  buttonType = ButtonType.BUTTON,
   onClick,
 }) => {
   const renderContent = useMemo(() => {
@@ -40,21 +40,12 @@ const Button: React.FC<CustomButtonProps> = memo(({
     );
   }, [loading, iconLeft, title, iconRight]);
 
-  const handleClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-    if (onClick) {
-      onClick(event);
-    }
-  }, [onClick]);
-
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
   return (
     <button
-      ref={buttonRef}
       type={buttonType}
       className={`btn btn-${variant} ${className}`}
       disabled={disabled || loading}
-      onClick={handleClick}
+      onClick={onClick}
     >
       {renderContent}
     </button>
