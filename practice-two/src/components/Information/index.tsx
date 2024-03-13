@@ -7,24 +7,19 @@ import { StudentProfile, IStudentInformation } from "@type/studentProfile";
 // assets
 import { email, phone, teacher } from "@assets/icon";
 
+// helpers
+import { filterClassmates } from "@helpers/filterClassmates";
+
 // css
 import "./Information.css";
+
+// item
+import InformationItem from "./InfomationItem";
 
 export interface InformationStudentProps {
     student: StudentProfile;
     classmates: IStudentInformation[];
 }
-
-const filterClassmates = (
-    allClassmates: IStudentInformation[],
-    currentStudent: StudentProfile
-): IStudentInformation[] => {
-    return allClassmates.filter(
-        (classmate) =>
-            classmate.classes === currentStudent.classes &&
-            classmate.studentID !== currentStudent.studentID
-    );
-};
 
 const InformationStudent: React.FC<InformationStudentProps> = React.memo(
     ({ student, classmates }) => {
@@ -77,31 +72,11 @@ const InformationStudent: React.FC<InformationStudentProps> = React.memo(
                         <img src={email} alt="icon" className="icon" />
                     </div>
                     <div className="group-item">
-                        <div className="age-item item">
-                            <p className="label">Age</p>
-                            <span className="student-age contact">
-                                {student.age}
-                            </span>
-                        </div>
-                        <div className="gender-item item">
-                            <p className="label">Gender</p>
-                            <span className="student-gender contact">
-                                {student.gender}
-                            </span>
-                        </div>
+                        <InformationItem label="Age" value={student.age} className="age-item" />
+                        <InformationItem label="Gender" value={student.gender} className="gender-item" />
                     </div>
-                    <div className="phone-item item">
-                        <p className="label">Phone number</p>
-                        <span className="student-phone contact">
-                            {student.phone}
-                        </span>
-                    </div>
-                    <div className="item">
-                        <p className="label">Email</p>
-                        <span className="student-email contact">
-                            {student.email}
-                        </span>
-                    </div>
+                    <InformationItem label="Phone number" value={student.phone} className="phone-item" />
+                    <InformationItem label="Email" value={student.email} />
                     <div className="item">
                         <p className="label">People from the same class</p>
                         <div className="classmates-images">
