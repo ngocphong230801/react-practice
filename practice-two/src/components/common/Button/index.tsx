@@ -15,7 +15,7 @@ export interface CustomButtonProps {
   disabled?: boolean;
   loading?: boolean;
   buttonType?: ButtonType;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onClick: () => void;
 }
 
 const Button: React.FC<CustomButtonProps> = memo(({
