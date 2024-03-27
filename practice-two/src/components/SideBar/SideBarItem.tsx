@@ -8,8 +8,8 @@ interface SidebarItemProps {
   onClick: () => void;
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = (
-  { label, icon, url, isActive, onClick }: SidebarItemProps
+const SidebarItem: React.FC<SidebarItemProps> = React.memo((
+  { label, icon, url, isActive, onClick }
 ): React.ReactElement => {
   const activeClass = isActive ? 'actives' : '';
 
@@ -27,6 +27,6 @@ const SidebarItem: React.FC<SidebarItemProps> = (
       </div>
     </li>
   );
-};
+});
 
 export default SidebarItem;
