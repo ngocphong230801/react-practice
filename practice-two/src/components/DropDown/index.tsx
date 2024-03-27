@@ -1,5 +1,9 @@
+// react
 import React, { memo, useMemo } from 'react';
 import { Controller, Control } from 'react-hook-form';
+import isEqual from 'react-fast-compare';
+
+// css
 import "./index.css";
 
 export interface DropdownSelectProps {
@@ -45,8 +49,6 @@ const DropdownSelect: React.FC<DropdownSelectProps> = memo(({
             />
         </div>
     );
-}, (prevProps, nextProps) => {
-    return JSON.stringify(prevProps) === JSON.stringify(nextProps);
-});
+}, (prevProps, nextProps) => isEqual(prevProps, nextProps));
 
 export default DropdownSelect;
