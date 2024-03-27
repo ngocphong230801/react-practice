@@ -6,11 +6,11 @@ interface InformationItemProps {
   className?: string;
 }
 
-const InformationItem: React.FC<InformationItemProps> = ({ label, value, className = "" }) => (
+const InformationItem: React.FC<InformationItemProps> = React.memo(({ label, value, className = "" }) => (
   <div className={`item ${className}`}>
     <p className="label">{label}</p>
-    <span className={`contact ${className}`}>{value}</span>
+    <span className={`value ${className}`}>{value}</span>
   </div>
-);
+));
 
 export default InformationItem;

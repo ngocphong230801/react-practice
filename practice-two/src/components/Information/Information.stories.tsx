@@ -1,6 +1,8 @@
 import { StoryObj, Meta } from '@storybook/react';
 import InformationStudent, { InformationStudentProps } from './index';
 import { StudentProfile } from '@type/studentProfile';
+import "../../App.css";
+import "../../index.css";
 
 const sampleStudent: StudentProfile = {
   studentID: "98898",

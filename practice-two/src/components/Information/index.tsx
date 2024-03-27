@@ -1,5 +1,5 @@
 // react
-import React, { useMemo } from "react";
+import React, {useCallback } from "react";
 
 // types
 import { StudentProfile, IStudentInformation } from "@type/studentProfile";
@@ -8,7 +8,8 @@ import { StudentProfile, IStudentInformation } from "@type/studentProfile";
 import { email, phone, teacher } from "@assets/icon";
 
 // helpers
-import { filterClassmates } from "@helpers/filterClassmates";
+import useClassmatesList from "@helpers/filterClassmates";
+import { DISPLAY_COUNT } from "@constants/displayCount";
 
 // css
 import "./Information.css";
@@ -23,15 +24,11 @@ export interface InformationStudentProps {
 
 const InformationStudent: React.FC<InformationStudentProps> = React.memo(
     ({ student, classmates }) => {
-        const classmatesList = useMemo(
-            () => filterClassmates(classmates, student.studentID),
-            [classmates, student.studentID]
-        );
-        const displayCount = 5;
-
-        const renderClassmates = () => {
+        const classmatesList = useClassmatesList(student.studentID, student.classes, classmates);
+        
+        const renderClassmates = useCallback(() => {
             return classmatesList
-                .slice(0, displayCount)
+                .slice(0, DISPLAY_COUNT)
                 .map((classmate) => (
                     <img
                         key={classmate.studentID}
@@ -40,19 +37,16 @@ const InformationStudent: React.FC<InformationStudentProps> = React.memo(
                         className="classmate-image"
                     />
                 ));
-        };
+        }, [classmatesList]);
 
-        const renderMoreClassmates = () => {
-            if (classmatesList.length > displayCount) {
-                return (
-                    <span className="more-classmates">
-                        +{classmatesList.length - displayCount} more
-                    </span>
-                );
-            }
-            return null;
-        };
-
+        const renderMoreClassmates = useCallback(() => (
+            classmatesList.length > DISPLAY_COUNT ? (
+              <span className="more-classmates">
+                +{classmatesList.length - DISPLAY_COUNT} more
+              </span>
+            ) : null
+          ), [classmatesList]);
+          
         return (
             <div className="information-student">
                 <div className="info-student">

@@ -10,9 +10,4 @@ export interface StudentProfile {
     age: number;
 }
 
-export interface IStudentInformation {
-    name: string;
-    studentID: string;
-    imageUrl: string;
-    classes: string;
-} 
+export type IStudentInformation = Pick<StudentProfile, 'name' | 'studentID' | 'imageUrl' | 'classes'>;
