@@ -1,0 +1,6 @@
+export {default as billing} from "./icon-billing.svg"
+export {default as dashboard} from "./icon-home.svg"
+export {default as exams} from "./icon-exam.svg"
+export {default as setting} from "./icon-setting.svg"
+export {default as student} from "./icon-student.svg"
+export {default as feature} from "./icon-feature.svg"
