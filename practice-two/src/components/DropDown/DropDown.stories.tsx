@@ -8,8 +8,6 @@ export default {
     component: DropdownSelect,
 } as Meta<typeof DropdownSelect>;
 
-
-
 export const Default: StoryObj<DropdownSelectProps> = {
     render: (args) => {
 
@@ -24,7 +22,6 @@ export const Default: StoryObj<DropdownSelectProps> = {
     args: {
         name: 'Class',
         options: CLASS_OPTIONS,
-        error: null,
         isDisabled: false,
     },
 };
@@ -43,7 +40,6 @@ export const Gender: StoryObj<DropdownSelectProps> = {
     args: {
         name: 'Class',
         options: GENDER_OPTIONS,
-        error: null,
         isDisabled: false,
     },
 };
