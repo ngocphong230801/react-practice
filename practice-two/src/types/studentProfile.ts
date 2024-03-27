@@ -1,6 +1,6 @@
 export interface StudentProfile {
     name: string;
-    studentID: number;
+    studentID: string;
     email: string;
     classes: string;
     gender: string
@@ -12,7 +12,7 @@ export interface StudentProfile {
 
 export interface IStudentInformation {
     name: string;
-    studentID: number;
+    studentID: string;
     imageUrl: string;
     classes: string;
 } 
