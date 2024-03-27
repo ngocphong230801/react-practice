@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 interface SidebarItemProps {
   label: string;
@@ -9,15 +9,13 @@ interface SidebarItemProps {
 }
 
 const SidebarItem: React.FC<SidebarItemProps> = React.memo((
-  { label, icon, url, isActive, onClick }
+  { label, icon, isActive, onClick }
 ): React.ReactElement => {
-  const activeClass = isActive ? 'actives' : '';
+  const handleClick = useCallback(() => {
+    onClick();
+  }, [onClick]);
 
-  const handleClick = () => {
-    if (url) {
-      onClick();
-    }
-  };
+  const activeClass = isActive ? 'actives' : '';
 
   return (
     <li className={`sidebar-item ${activeClass}`} onClick={handleClick}>

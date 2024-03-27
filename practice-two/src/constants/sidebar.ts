@@ -1,4 +1,4 @@
-import { billing, dashboard, exams, setting, student } from "../assets/icon";
+import { billing, dashboard, exams, setting, student } from "@assets/icon";
 
 const SIDEBAR_ITEM = [
     {

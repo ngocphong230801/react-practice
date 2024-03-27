@@ -22,24 +22,24 @@ const SideBar: React.FC = React.memo(() => {
     navigate(url);
   }, [navigate]);
 
-  const renderList = useMemo(() => {
-    return SIDEBAR_ITEM.map((item) => {
-      const { id, label, icon, url } = item;
-  
-      const isActive = location.pathname === url;
-  
-      return (
-        <SidebarItem
-          key={id}
-          label={label}
-          icon={icon}
-          url={url || ''}
-          isActive={isActive}
-          onClick={() => url && handleNavigation(url)}
-        />
-      );
-    });
-  }, [handleNavigation, location.pathname]);
+  const getItemClickHandler = useCallback((url: string | undefined) => {
+    return () => {
+      if (url !== undefined) {
+        handleNavigation(url);
+      }
+    };
+  }, [handleNavigation]);
+    
+  const renderList = useMemo(() => SIDEBAR_ITEM.map(({ id, label, icon, url }) => (
+    <SidebarItem
+      key={id}
+      label={label}
+      icon={icon}
+      url={url || ''}
+      isActive={location.pathname === url}
+      onClick={getItemClickHandler(url)}
+    />
+  )), [getItemClickHandler, location.pathname]);
 
   return (
     <div className="sidebar">
