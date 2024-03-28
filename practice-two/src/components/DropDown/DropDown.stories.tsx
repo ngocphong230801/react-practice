@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useForm, FormProvider } from 'react-hook-form';
 import DropdownSelect, { DropdownSelectProps } from '.';
-import { CLASS_OPTIONS, GENDER_OPTIONS } from '@constants/dropdownData';
+import { CLASS_OPTIONS, GENDER_OPTIONS } from 'src/mocking/dropdownData';
 
 export default {
     title: 'Components/DropdownSelect',
