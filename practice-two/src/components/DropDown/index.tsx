@@ -1,5 +1,9 @@
-import React, { memo, useMemo} from 'react';
+// react
+import React, { memo, useMemo } from 'react';
 import { Controller, Control } from 'react-hook-form';
+import isEqual from 'react-fast-compare';
+
+// css
 import "./index.css";
 
 export interface DropdownSelectProps {
@@ -7,8 +11,6 @@ export interface DropdownSelectProps {
     label: string;
     options: { value: string; label: string; color?: string }[];
     control: Control;
-    requiredMessage?: string;
-    error?: string | null;
     isDisabled: boolean;
 }
 
@@ -17,14 +19,8 @@ const DropdownSelect: React.FC<DropdownSelectProps> = memo(({
     label,
     options,
     control,
-    requiredMessage,
-    error,
     isDisabled,
 }) => {
-    const validationRules = useMemo(() => ({
-        required: requiredMessage ? true : false
-    }), [requiredMessage]);
-
     const renderedOptions = useMemo(() => options.map(({ value, label }) => (
         <option key={value} value={value}>
             {label}
@@ -37,7 +33,6 @@ const DropdownSelect: React.FC<DropdownSelectProps> = memo(({
             <Controller
                 name={name}
                 control={control}
-                rules={validationRules}
                 render={({ field: { onChange, value, ref } }) => (
                     <select
                         id={name}
@@ -47,21 +42,13 @@ const DropdownSelect: React.FC<DropdownSelectProps> = memo(({
                         disabled={isDisabled}
                         className={`dropdown-select ${value ? 'selected' : 'placeholder'}`}
                     >
-                        <option disabled={!requiredMessage || value} value="">
-                            {label}
-                        </option>
+                        <option value="">{`Select ${label}`}</option>
                         {renderedOptions}
                     </select>
                 )}
             />
-            {requiredMessage && (
-                <span className="required-message">{requiredMessage}</span>
-            )}
-            {error && <span className="error-message">{error}</span>}
         </div>
     );
-}, (prevProps, nextProps) => {
-    return JSON.stringify(prevProps) === JSON.stringify(nextProps);
-});
+}, (prevProps, nextProps) => isEqual(prevProps, nextProps));
 
 export default DropdownSelect;
